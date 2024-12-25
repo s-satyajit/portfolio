@@ -24,7 +24,7 @@ import python from "./tech/python.png";
 
 import eduskills_foundation from "./company/eduskills_foundation.png";
 import artsnmor from "./company/artsnmor.png";
-import fluenceTech from "./company/fluenceTech.png";
+import fluenceTech from "./company/FluenceTech.png";
 
 import liveTalk from "./livetalk.png";
 import hirrd from "./hirrd.png";
