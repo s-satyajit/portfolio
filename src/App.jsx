@@ -1,6 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 
-import { Github, About, Contact, Experience, Feedbacks, Hero, Navbar, Tech, Works, StarsCanvas } from "./components";
+import { Github, About, Contact, Experience, IndividualSocialHandle, Hero, Navbar, Tech, Works, StarsCanvas } from "./components";
+// import IndividualSocialHandle from "./components/IndividualSocialHandle";
 
 const App = () => {
   return (
@@ -15,7 +16,8 @@ const App = () => {
         <Experience />
         <Tech />
         <Works />
-        <Feedbacks />
+        {/* <Feedbacks /> */}
+        <IndividualSocialHandle />
         <div className='relative z-0'>
           <Contact />
           <StarsCanvas />

@@ -6,7 +6,7 @@ import About from "./About";
 import Tech from "./Tech";
 import Experience from "./Experience";
 import Works from "./Works";
-import Feedbacks from "./Feedbacks";
+import IndividualSocialHandle from './IndividualSocialHandle';
 import Contact from "./Contact";
 import CanvasLoader from "./Loader";
 
@@ -19,7 +19,7 @@ export {
   Tech,
   Experience,
   Works,
-  Feedbacks,
+  IndividualSocialHandle,
   Contact,
   CanvasLoader,
   EarthCanvas, 

@@ -40,23 +40,20 @@ const About = () => {
     <>
       <motion.div variants={textVariant()}>
         <p className={styles.sectionSubText}>Introduction</p>
-        <h2 className={styles.sectionHeadText}>Overview.</h2>
+        <h2 className={styles.sectionHeadText}>Overview</h2>
       </motion.div>
 
       <motion.p
         variants={fadeIn("", "", 0.1, 1)}
         className="mt-4 text-secondary text-[17px] max-w-3xl leading-[30px]"
       >
-        I am a passionate Frontend and Python Developer from India, committed to
-        delivering valuable technological solutions to businesses. Proficient in
-        Python frameworks like Pygame, Flask, Tkinter, and Django, I excel in
-        creating web applications, user interfaces, and interactive games. My
-        expertise in frontend and full-stack development enables effective
-        collaboration and creative problem-solving. Keeping abreast of the
-        latest technologies, I ensure the best solutions for my clients. With
-        meticulous attention to detail, I strive to develop user-friendly
-        software that achieves the client's objectives, reflecting my dedication
-        to excellence in every project.
+        I'm a software developer with experience in both frontend and backend
+        development. I’ve worked with React, Node.js, and MySQL to build fast,
+        scalable apps, and I’m skilled in using Docker and JWT for better
+        performance and security. I’ve also designed user-friendly interfaces
+        and optimized websites for responsiveness. Always eager to learn new
+        technologies, I’m passionate about creating efficient and impactful
+        solutions.
       </motion.p>
 
       <div className="mt-20 flex flex-wrap gap-10">
