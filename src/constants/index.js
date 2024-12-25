@@ -5,15 +5,16 @@ import {
   web,
   javascript,
   typescript,
+  java,
   html,
-  css,
+  kubernetes,
+  kafka,
   reactjs,
   python,
   tailwind,
   nodejs,
   mongodb,
   git,
-  figma,
   github_logo,
   eduskills_foundation,
   artsnmor,
@@ -23,6 +24,10 @@ import {
   codevault,
   threejs,
   github,
+  docker,
+  webRTC,
+  redis,
+  aws,
 } from "../assets";
 
 export const navLinks = [
@@ -61,12 +66,8 @@ const services = [
 
 const technologies = [
   {
-    name: "HTML 5",
-    icon: html,
-  },
-  {
-    name: "CSS 3",
-    icon: css,
+    name: "Java",
+    icon: java,
   },
   {
     name: "JavaScript",
@@ -85,10 +86,6 @@ const technologies = [
     icon: python,
   },
   {
-    name: "Tailwind CSS",
-    icon: tailwind,
-  },
-  {
     name: "Node JS",
     icon: nodejs,
   },
@@ -97,20 +94,28 @@ const technologies = [
     icon: mongodb,
   },
   {
-    name: "Three JS",
-    icon: threejs,
+    name: "WebRTC",
+    icon: webRTC,
   },
   {
-    name: "git",
-    icon: git,
+    name: "Redis",
+    icon: redis,
   },
   {
-    name: "figma",
-    icon: figma,
+    name: "Kafka",
+    icon: kafka,
   },
   {
-    name: "github",
-    icon: github_logo,
+    name: "Kubernetes",
+    icon: kubernetes,
+  },
+  {
+    name: "docker",
+    icon: docker,
+  },
+  {
+    name: "aws",
+    icon: aws,
   },
 ];
 

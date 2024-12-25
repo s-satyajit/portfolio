@@ -8,11 +8,18 @@ import menu from "./menu.svg";
 import close from "./close.svg";
 
 import css from "./tech/css.png";
+import kubernetes from "./tech/kubernetes.png";
+import kafka from "./tech/kafka.png";
 import github_logo from "./github.png"
 import figma from "./tech/figma.png";
 import git from "./tech/git.png";
 import html from "./tech/html.png";
 import javascript from "./tech/javascript.png";
+import java from "./tech/java.png";
+import docker from "./tech/docker.png";
+import webRTC from "./tech/webRTC.png";
+import redis  from "./tech/redis.png";
+import aws from "./tech/aws.png";
 import mongodb from "./tech/mongodb.png";
 import nodejs from "./tech/nodejs.png";
 import reactjs from "./tech/reactjs.png";
@@ -40,11 +47,17 @@ export {
   close,
   css,
   github_logo,
-  figma,
+  docker,
+  kubernetes,
+  webRTC,
+  kafka,
+  redis,
+  aws,
   git,
   python,
   html,
   javascript,
+  java,
   mongodb,
   nodejs,
   reactjs,
