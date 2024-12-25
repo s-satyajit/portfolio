@@ -21,10 +21,9 @@ import typescript from "./tech/typescript.png";
 import threejs from "./tech/threejs.svg";
 import python from "./tech/python.png";
 
-import meta from "./company/meta.png";
-import shopify from "./company/shopify.png";
-import bharat_intern from "./company/bharat_intern.png";
-import tesla from "./company/tesla.png";
+import eduskills_foundation from "./company/eduskills_foundation.png";
+import artsnmor from "./company/artsnmor.png";
+import fluenceTech from "./company/fluenceTech.png";
 
 import quizzify from "./quizzify.png";
 import resume from "./resume.png";
@@ -52,10 +51,9 @@ export {
   tailwind,
   typescript,
   threejs,
-  meta,
-  shopify,
-  bharat_intern,
-  tesla,
+  eduskills_foundation,
+  artsnmor,
+  fluenceTech,
   quizzify,
   resume,
   codevault,

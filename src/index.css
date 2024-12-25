@@ -61,7 +61,7 @@
     #f12711,
     #f5af19
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  -webkit-background-clip: text;
+  /* -webkit-background-clip: text; */
   -webkit-text-fill-color: transparent;
 }
 
@@ -77,9 +77,40 @@
     #11998e,
     #38ef7d
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  -webkit-background-clip: text;
+  /* -webkit-background-clip: text; */
   -webkit-text-fill-color: transparent;
 }
+
+/* index.css */
+.github-container {
+  padding: 2rem;
+  /* background-color: #f5f5f5; */
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.section-subtext {
+  font-size: 1.2rem;
+  color: #0585f5;
+  margin-bottom: 0.5rem;
+}
+
+.section-headtext {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff0000;
+  margin-bottom: 1.5rem;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
 
 .blue-text-gradient {
   /* background: -webkit-linear-gradient(#eee, #333); */
@@ -94,7 +125,7 @@
     #2f80ed,
     #56ccf2
   ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  -webkit-background-clip: text;
+  /* -webkit-background-clip: text; */
   -webkit-text-fill-color: transparent;
 }
 

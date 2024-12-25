@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import React from "react";
-import Tilt from "react-tilt";
+import {Tilt} from "react-tilt";
 
 import { github } from "../assets";
 import { projects } from "../constants";
