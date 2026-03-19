@@ -16,7 +16,7 @@
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.468.0",
     "next": "latest",
-    "next-mdx-remote": "^5.0.0",
+    "next-mdx-remote": "^6.0.0",
     "nodemailer": "^6.9.16",
     "pdf-parse": "^2.4.5",
     "react": "^19.2.4",
