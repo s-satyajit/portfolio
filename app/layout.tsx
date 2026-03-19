@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { JetBrains_Mono, Manrope, Space_Grotesk } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 
 import { SiteShell } from "@/components/layout/site-shell";
 import { SchemaScript } from "@/components/ui/schema-script";
@@ -71,6 +72,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${headingFont.variable} ${bodyFont.variable} ${monoFont.variable}`}>
         <SchemaScript schema={[personSchema(), websiteSchema()]} />
         <SiteShell>{children}</SiteShell>
+        <Analytics />
       </body>
     </html>
   );
