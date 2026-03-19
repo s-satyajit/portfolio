@@ -1,0 +1,39 @@
+---
+slug: hirrd-product-architecture
+title: Hirrd - Product Architecture Case Study
+context: A job platform concept requiring dual user flows for recruiters and candidates.
+problem: Build a hiring workflow that stays simple while handling role-specific functionality.
+analysis: Compared role-isolated vs unified-flow architecture and selected role-isolated patterns for clarity and maintainability.
+conclusion: Role-first architecture improved UX clarity and reduced API ambiguity.
+keyInsights:
+  - User-role boundaries should shape routing and API contracts early.
+  - Information hierarchy is a hiring-product advantage, not just a visual concern.
+learnings:
+  - Product language and system boundaries must be aligned.
+  - Authentication workflows should be designed as UX, not only security.
+date: 2026-01-25
+tags:
+  - case-study
+  - architecture
+  - full-stack
+draft: false
+---
+
+## Context
+
+The platform needed to support two audiences with different intents:
+
+- Recruiters posting and reviewing
+- Candidates discovering and applying
+
+## Options Considered
+
+1. Shared interface with conditional behavior
+2. Explicit role-first interface and route boundaries
+
+Option 2 performed better for clarity and maintainability.
+
+## What I Would Improve Next
+
+- Add stronger analytics for recruiter funnel visibility
+- Introduce richer candidate profile scoring signals

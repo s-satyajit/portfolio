@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface: #070b13;
+  --surface-elevated: #0b1220;
+  --surface-card: #0f1728;
+  --text-primary: #edf3ff;
+  --text-secondary: #9caecc;
+  --accent: #2dd4ff;
+  --accent-soft: rgba(45, 212, 255, 0.12);
+  --border-color: rgba(156, 174, 204, 0.24);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  background:
+    radial-gradient(circle at 10% 0%, rgba(45, 212, 255, 0.12), transparent 35%),
+    radial-gradient(circle at 85% 20%, rgba(56, 189, 248, 0.08), transparent 40%),
+    var(--surface);
+  color: var(--text-primary);
+  font-family: var(--font-body), sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+::selection {
+  background: rgba(45, 212, 255, 0.3);
+}
+
+.font-heading {
+  font-family: var(--font-heading), sans-serif;
+  letter-spacing: -0.02em;
+}
+
+.font-mono {
+  font-family: var(--font-mono), monospace;
+}
+
+.prose {
+  color: var(--text-primary);
+}
+
+.prose :where(h1, h2, h3, h4) {
+  color: var(--text-primary);
+  font-family: var(--font-heading), sans-serif;
+}
+
+.prose :where(strong, code) {
+  color: #c7e8ff;
+}
+
+.prose :where(a) {
+  color: var(--accent);
+}
+
+.prose :where(blockquote) {
+  border-left-color: rgba(45, 212, 255, 0.45);
+  color: #bfd0ec;
+  background: rgba(15, 23, 40, 0.8);
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+}
+
+.prose :where(pre) {
+  background: #04070f !important;
+  border: 1px solid rgba(156, 174, 204, 0.2);
+  border-radius: 0.8rem;
+  padding: 1rem !important;
+  overflow-x: auto;
+}
+
+.prose :where(pre code) {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.prose :where(code) {
+  background: rgba(45, 212, 255, 0.1);
+  border: 1px solid rgba(45, 212, 255, 0.2);
+  border-radius: 0.35rem;
+  padding: 0.1rem 0.35rem;
+}
+
+.prose :where(h2, h3) {
+  scroll-margin-top: 96px;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal {
+  color: #67e8f9;
+}
+
+.hljs-string,
+.hljs-title,
+.hljs-name,
+.hljs-attribute {
+  color: #c7d2fe;
+}
+
+.hljs-number,
+.hljs-meta,
+.hljs-symbol {
+  color: #fda4af;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.noise-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 2px 2px;
+  pointer-events: none;
+  opacity: 0.4;
+}

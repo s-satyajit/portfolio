@@ -1,0 +1,41 @@
+---
+slug: shipping-dashboard-ux
+title: Shipping Dashboard UX That Operations Teams Can Actually Use
+subtitle: Interface and architecture decisions that make data products genuinely usable.
+excerpt: Lessons from designing dashboard interfaces that stay usable under real data load.
+date: 2026-01-12
+category: product-engineering
+tags:
+  - full-stack
+  - ux
+  - dashboards
+readTime: 5 min read
+cover: /images/projects/inventory-dashboard.png
+coverAlt: Dashboard UI layout preview
+projectMentions:
+  - inventory-dashboard
+  - teamzen-employee-management-system
+draft: false
+seoTitle: Shipping Dashboard UX That Operations Teams Can Actually Use
+seoDescription: Practical UX and engineering patterns for building data-heavy dashboards with clarity.
+---
+
+Dashboards fail when they try to show everything equally.
+
+The implementation challenge is not charting libraries. It is choosing what deserves attention in the first three seconds.
+
+## Patterns That Worked
+
+- A compact proof strip with high-value summary metrics
+- Progressive disclosure from summary to detail tables
+- Consistent labels so users do not re-learn every card
+
+## Engineering Impact
+
+When UX hierarchy is clear, backend requirements also become clearer:
+
+- Which aggregates are needed
+- Which filters must be fast
+- Which data can remain secondary
+
+Good dashboard UX is a systems decision, not only a design decision.

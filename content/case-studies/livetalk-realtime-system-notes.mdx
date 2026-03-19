@@ -1,0 +1,34 @@
+---
+slug: livetalk-realtime-system-notes
+title: LiveTalk - Realtime System Notes
+context: A multi-user chat product prototype focused on responsiveness and reliability.
+problem: Keep realtime interactions stable without overwhelming front-end state complexity.
+analysis: Evaluated push-only event handling versus event + local reconciliation to prevent message drift.
+conclusion: Event plus reconciliation produced better perceived reliability.
+keyInsights:
+  - Realtime UX quality depends on fast feedback loops.
+  - Defensive state handling matters even in small chat products.
+learnings:
+  - Event naming and payload contracts are critical scaling points.
+  - Latency masking can improve user confidence.
+date: 2026-02-04
+tags:
+  - realtime
+  - full-stack
+  - product
+draft: false
+---
+
+## System Focus
+
+The key architecture question was how to preserve message order and trust during network variability.
+
+## Approach
+
+- Use event-driven update flow
+- Keep local state snapshots for reconciliation
+- Surface status feedback in the UI instead of silent waiting
+
+## Key Takeaway
+
+Realtime systems are product systems. Reliability perception is as important as raw transport speed.
