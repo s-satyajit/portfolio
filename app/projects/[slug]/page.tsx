@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 
+import { ContextualAIAssistant } from "@/components/ai/contextual-ai-assistant";
 import { Container } from "@/components/layout/container";
 import { PageBackButton } from "@/components/layout/page-back-button";
 import { ButtonLink } from "@/components/ui/button-link";
@@ -75,7 +76,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             ))}
           </div>
 
-          <div className="mt-8 relative h-72 overflow-hidden rounded-2xl border border-border bg-surface-card sm:h-96">
+          <div className="relative mt-8 h-72 overflow-hidden rounded-2xl border border-border bg-surface-card sm:h-96">
             <Image
               src={project.images[0]}
               alt={`${project.title} screenshot`}
@@ -100,7 +101,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             <h2 className="font-heading text-2xl">Key Features</h2>
             <ul className="mt-3 space-y-2 text-sm text-text-secondary">
               {project.features.map((feature) => (
-                <li key={feature}>• {feature}</li>
+                <li key={feature}>- {feature}</li>
               ))}
             </ul>
           </section>
@@ -109,10 +110,19 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             <h2 className="font-heading text-2xl">Architecture Notes</h2>
             <ul className="mt-3 space-y-2 text-sm text-text-secondary">
               {project.architecture.map((item) => (
-                <li key={item}>• {item}</li>
+                <li key={item}>- {item}</li>
               ))}
             </ul>
           </section>
+
+          <div className="mt-5">
+            <ContextualAIAssistant
+              mode="project"
+              projectSlug={project.slug}
+              projectTitle={project.title}
+              compact
+            />
+          </div>
 
           <div className="mt-8 flex flex-wrap gap-3">
             {project.links.github ? (

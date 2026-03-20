@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { ContextualAIAssistant } from "@/components/ai/contextual-ai-assistant";
 import { Container } from "@/components/layout/container";
 import { GithubHeatmap } from "@/components/sections/github-heatmap";
 import { ButtonLink } from "@/components/ui/button-link";
@@ -15,7 +16,7 @@ import { profilePageSchema } from "@/lib/schema";
 export const metadata = buildPageMetadata({
   title: "About",
   description:
-    "Learn about Satyajit Samal’s background, education, technical direction, and active engineering focus in AI + full-stack development.",
+    "Learn about Satyajit Samal's background, education, technical direction, and active engineering focus in AI + full-stack development.",
   path: "/about"
 });
 
@@ -92,11 +93,13 @@ export default function AboutPage() {
                     <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
                       {group.title}
                     </p>
-                    <p className="mt-2 text-sm text-text-secondary">{group.items.join(" • ")}</p>
+                    <p className="mt-2 text-sm text-text-secondary">{group.items.join(" | ")}</p>
                   </div>
                 ))}
               </div>
             </article>
+
+            <ContextualAIAssistant mode="about" compact />
           </div>
         </div>
 

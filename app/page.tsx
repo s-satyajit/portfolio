@@ -40,15 +40,6 @@ export default async function HomePage() {
       <ProofStripSection />
       <FeaturedProjectsSection />
 
-      <Section
-        id="ai-panel"
-        eyebrow="AI Integration"
-        title="Explore my work with a grounded AI panel"
-        description="Ask recruiter and client questions directly. The assistant is constrained to portfolio data and avoids fabricated claims."
-      >
-        <PortfolioAIPanel />
-      </Section>
-
       <CapabilitiesSection />
       <ExperienceFocusSection />
 
@@ -98,6 +89,17 @@ export default async function HomePage() {
       />
 
       <AboutPreviewSection />
+
+      <Section
+        id="ai-panel"
+        eyebrow="Quick Q&A"
+        title="Ask for a fast portfolio summary"
+        description="Use the assistant for role-fit checks, project selection, or current-focus questions. Answers stay constrained to portfolio context."
+        className="pb-14 pt-8 sm:pb-16 sm:pt-10"
+      >
+        <PortfolioAIPanel />
+      </Section>
+
       <ContactCtaSection />
     </>
   );

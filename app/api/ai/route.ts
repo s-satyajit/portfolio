@@ -7,7 +7,9 @@ import { AIRequestBody } from "@/types/ai";
 
 const requestSchema = z.object({
   query: z.string().min(3).max(500),
-  persona: z.enum(["recruiter", "client", "collaborator", "general"]).optional()
+  persona: z.enum(["recruiter", "client", "collaborator", "general"]).optional(),
+  mode: z.enum(["homepage", "recruiter", "project", "about"]).optional(),
+  projectSlug: z.string().min(1).max(120).optional()
 });
 
 function getClientKey(request: NextRequest): string {
@@ -39,6 +41,17 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "Invalid request input." }, { status: 400 });
   }
 
-  const result = await generatePortfolioAnswer(parsed.data.query, parsed.data.persona);
+  if (parsed.data.mode === "project" && !parsed.data.projectSlug) {
+    return NextResponse.json(
+      { message: "Project slug is required for project mode." },
+      { status: 400 }
+    );
+  }
+
+  const result = await generatePortfolioAnswer(parsed.data.query, {
+    persona: parsed.data.persona,
+    mode: parsed.data.mode,
+    projectSlug: parsed.data.projectSlug
+  });
   return NextResponse.json(result, { status: 200 });
 }
