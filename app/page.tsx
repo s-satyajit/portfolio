@@ -1,9 +1,7 @@
 import { PortfolioAIPanel } from "@/components/ai/portfolio-ai-panel";
 import { AboutPreviewSection } from "@/components/sections/about-preview-section";
-import { CapabilitiesSection } from "@/components/sections/capabilities-section";
 import { ContactCtaSection } from "@/components/sections/contact-cta-section";
 import { ContentPreviewSection } from "@/components/sections/content-preview-section";
-import { ExperienceFocusSection } from "@/components/sections/experience-focus-section";
 import { FeaturedProjectsSection } from "@/components/sections/featured-projects-section";
 import { HeroSection } from "@/components/sections/hero-section";
 import { ProofStripSection } from "@/components/sections/proof-strip-section";
@@ -16,7 +14,7 @@ import { getAllBlogPosts, getAllCaseStudies, getAllResearchEntries } from "@/lib
 export const metadata = buildPageMetadata({
   title: "Satyajit Samal - AI Engineer + Full-Stack Developer",
   description:
-    "Official portfolio of Satyajit Samal showcasing AI-integrated products, full-stack projects, research thinking, and practical engineering execution.",
+    "Portfolio of Satyajit Samal: AI-integrated product work, full-stack engineering projects, research-driven thinking, and recruiter-friendly proof of execution.",
   path: "/"
 });
 
@@ -40,14 +38,11 @@ export default async function HomePage() {
       <ProofStripSection />
       <FeaturedProjectsSection />
 
-      <CapabilitiesSection />
-      <ExperienceFocusSection />
-
       <ContentPreviewSection
         id="research-preview"
         eyebrow="Research & Publications"
-        title="Analytical depth through research-driven work"
-        description="Publication-oriented entries and technical analysis in progress."
+        title="Research-driven analysis behind practical implementation"
+        description="Publication-oriented entries connecting AI concepts to product decisions and system tradeoffs."
         viewAllHref="/research"
         viewAllLabel="View Research"
         items={researchEntries.slice(0, 3).map((entry) => ({
@@ -61,8 +56,8 @@ export default async function HomePage() {
       <ContentPreviewSection
         id="blog-preview"
         eyebrow="Blog / Insights"
-        title="Implementation notes, product decisions, and AI engineering learnings"
-        description="Writing that explains how things are built, not just what was built."
+        title="Implementation notes, architecture breakdowns, and engineering learnings"
+        description="Articles focused on how products are designed and built, including tradeoffs and iteration decisions."
         viewAllHref="/blog"
         viewAllLabel="Read Blog"
         items={blogPosts.slice(0, 3).map((entry) => ({
@@ -76,8 +71,8 @@ export default async function HomePage() {
       <ContentPreviewSection
         id="case-preview"
         eyebrow="Case Studies"
-        title="Structured thinking behind product and architecture decisions"
-        description="Polished analytical writeups from real implementation contexts."
+        title="Case-study analysis from real product contexts"
+        description="Structured writeups covering problem framing, options considered, and implementation outcomes."
         viewAllHref="/case-studies"
         viewAllLabel="Explore Case Studies"
         items={caseStudies.slice(0, 3).map((entry) => ({
@@ -92,9 +87,9 @@ export default async function HomePage() {
 
       <Section
         id="ai-panel"
-        eyebrow="Quick Q&A"
-        title="Ask for a fast portfolio summary"
-        description="Use the assistant for role-fit checks, project selection, or current-focus questions. Answers stay constrained to portfolio context."
+        eyebrow="Optional AI Layer"
+        title="Use AI for fast portfolio navigation"
+        description="For quick role-fit checks, project guidance, and current-focus questions. Responses stay constrained to portfolio context."
         className="pb-14 pt-8 sm:pb-16 sm:pt-10"
       >
         <PortfolioAIPanel />

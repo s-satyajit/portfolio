@@ -122,3 +122,30 @@ export function breadcrumbSchema(
     }))
   };
 }
+
+export function blogCollectionSchema(
+  items: Array<{
+    title: string;
+    path: string;
+    description: string;
+    date: string;
+  }>
+) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    name: "Blog",
+    url: absoluteUrl("/blog"),
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: items.map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: absoluteUrl(item.path),
+        name: item.title,
+        description: item.description,
+        datePublished: item.date
+      }))
+    }
+  };
+}

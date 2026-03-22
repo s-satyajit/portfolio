@@ -4,6 +4,8 @@ import { ReactNode } from "react";
 
 import { PageBackButton } from "@/components/layout/page-back-button";
 import { authorProfile } from "@/data/author";
+import { formatAudience, formatDifficulty } from "@/lib/blog-utils";
+import { BlogFrontmatter } from "@/types/blog";
 
 interface BlogHeroProps {
   title: string;
@@ -11,9 +13,21 @@ interface BlogHeroProps {
   excerpt: string;
   meta: ReactNode;
   tags: string[];
+  audience?: BlogFrontmatter["audience"];
+  difficulty?: BlogFrontmatter["difficulty"];
+  updated?: string;
 }
 
-export function BlogHero({ title, subtitle, excerpt, meta, tags }: BlogHeroProps) {
+export function BlogHero({
+  title,
+  subtitle,
+  excerpt,
+  meta,
+  tags,
+  audience,
+  difficulty,
+  updated
+}: BlogHeroProps) {
   return (
     <header className="space-y-4 rounded-2xl border border-border bg-surface-card p-5 sm:p-6">
       <PageBackButton iconOnly />
@@ -23,6 +37,25 @@ export function BlogHero({ title, subtitle, excerpt, meta, tags }: BlogHeroProps
       <p className="text-sm leading-relaxed text-text-secondary">{excerpt}</p>
 
       <div className="flex flex-wrap gap-2 text-xs text-text-secondary">{meta}</div>
+
+      <div className="flex flex-wrap gap-2">
+        {audience ? (
+          <span className="rounded-full border border-border px-2.5 py-1 text-xs text-text-secondary">
+            Audience: {formatAudience(audience)}
+          </span>
+        ) : null}
+        {difficulty ? (
+          <span className="rounded-full border border-border px-2.5 py-1 text-xs text-text-secondary">
+            Difficulty: {formatDifficulty(difficulty)}
+          </span>
+        ) : null}
+        {updated ? (
+          <span className="rounded-full border border-border px-2.5 py-1 text-xs text-text-secondary">
+            Updated: {updated}
+          </span>
+        ) : null}
+      </div>
+
       <div className="flex flex-wrap gap-1.5">
         {tags.map((tag) => (
           <Link

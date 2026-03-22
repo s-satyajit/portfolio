@@ -4,6 +4,8 @@ import { notFound } from "next/navigation";
 import { AboutAuthor } from "@/components/blog/about-author";
 import { ArticleAIPanel } from "@/components/blog/article-ai-panel";
 import { ArticleEndCta } from "@/components/blog/article-end-cta";
+import { ArticleReadingWorkspace } from "@/components/blog/article-reading-workspace";
+import { ArticleShareBar } from "@/components/blog/article-share-bar";
 import { BlogHero } from "@/components/blog/blog-hero";
 import { PrevNextNav } from "@/components/blog/prev-next-nav";
 import { ProjectMentionCard } from "@/components/blog/project-mention-card";
@@ -14,6 +16,7 @@ import { SchemaScript } from "@/components/ui/schema-script";
 import { authorProfile } from "@/data/author";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
 import { absoluteUrl, buildPageMetadata } from "@/lib/seo";
+import { formatAudience, formatDifficulty } from "@/lib/blog-utils";
 import { formatDate } from "@/lib/utils";
 import {
   extractBlogHeadings,
@@ -76,6 +79,11 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const relatedPosts = allPosts
     .filter((entry) => entry.slug !== post.slug)
     .filter((entry) => entry.tags.some((tag) => post.tags.includes(tag)))
+    .slice(0, 4);
+
+  const categoryMatchedPosts = allPosts
+    .filter((entry) => entry.slug !== post.slug)
+    .filter((entry) => entry.category && entry.category === post.category)
     .slice(0, 3);
 
   const relatedCaseStudies = caseStudies
@@ -85,6 +93,9 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   const relatedResearch = researchEntries
     .filter((entry) => entry.tags.some((tag) => post.tags.includes(tag)))
     .slice(0, 2);
+
+  const wordCount = post.content.split(/\s+/).filter(Boolean).length;
+  const updatedDate = post.updated ? formatDate(post.updated) : undefined;
 
   return (
     <>
@@ -96,8 +107,8 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
             title: post.title,
             description: post.excerpt,
             publishedTime: post.date,
-            modifiedTime: post.date,
-            keywords: post.tags,
+            modifiedTime: post.updated || post.date,
+            keywords: post.category ? [...post.tags, post.category] : post.tags,
             image: post.cover,
             type: "BlogPosting"
           }),
@@ -110,27 +121,30 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
       />
 
       <article className="py-14 sm:py-16">
-        <Container className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_300px]">
+        <Container className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_320px]">
           <div className="space-y-8">
             <BlogHero
               title={post.title}
               subtitle={post.subtitle}
               excerpt={post.excerpt}
               tags={post.tags}
+              audience={post.audience}
+              difficulty={post.difficulty}
+              updated={updatedDate}
               meta={
                 <>
                   <span>{formatDate(post.date)}</span>
-                  <span>•</span>
+                  <span>|</span>
                   <span>{post.readTime}</span>
                   {post.category ? (
                     <>
-                      <span>•</span>
+                      <span>|</span>
                       <span>{post.category}</span>
                     </>
                   ) : null}
                   {post.draft ? (
                     <>
-                      <span>•</span>
+                      <span>|</span>
                       <span>Draft</span>
                     </>
                   ) : null}
@@ -138,9 +152,19 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
               }
             />
 
-            <div className="prose prose-invert max-w-none rounded-2xl border border-border bg-surface-card p-6 sm:p-8">
+            <section className="rounded-2xl border border-border bg-surface-card p-5">
+              <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">Article Positioning</p>
+              <p className="mt-2 text-sm text-text-secondary">
+                This piece connects technical implementation details with product-level decision making.
+                It is written to help recruiters and builders quickly understand execution quality.
+              </p>
+            </section>
+
+            <ArticleShareBar title={post.title} path={`/blog/${post.slug}`} />
+
+            <ArticleReadingWorkspace wordCount={wordCount} readTime={post.readTime}>
               {content}
-            </div>
+            </ArticleReadingWorkspace>
 
             <ProjectMentionCard slugs={post.projectMentions || []} />
             <ArticleAIPanel slug={post.slug} />
@@ -152,6 +176,18 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           <aside className="space-y-4 lg:sticky lg:top-24 lg:h-fit">
             <TableOfContents headings={headings} />
 
+            <section className="rounded-2xl border border-border bg-surface-card p-4">
+              <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-accent">Quick Facts</p>
+              <ul className="space-y-2 text-sm text-text-secondary">
+                <li>Published: {formatDate(post.date)}</li>
+                {updatedDate ? <li>Updated: {updatedDate}</li> : null}
+                <li>Read Time: {post.readTime || "N/A"}</li>
+                <li>Word Count: {wordCount}</li>
+                {post.audience ? <li>Audience: {formatAudience(post.audience)}</li> : null}
+                {post.difficulty ? <li>Difficulty: {formatDifficulty(post.difficulty)}</li> : null}
+              </ul>
+            </section>
+
             {relatedPosts.length > 0 ? (
               <section className="rounded-2xl border border-border bg-surface-card p-4">
                 <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-accent">
@@ -159,6 +195,23 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                 </p>
                 <ul className="space-y-2 text-sm text-text-secondary">
                   {relatedPosts.map((entry) => (
+                    <li key={entry.slug}>
+                      <Link className="hover:text-text-primary" href={`/blog/${entry.slug}`}>
+                        {entry.title}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ) : null}
+
+            {categoryMatchedPosts.length > 0 ? (
+              <section className="rounded-2xl border border-border bg-surface-card p-4">
+                <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-accent">
+                  Same Category
+                </p>
+                <ul className="space-y-2 text-sm text-text-secondary">
+                  {categoryMatchedPosts.map((entry) => (
                     <li key={entry.slug}>
                       <Link className="hover:text-text-primary" href={`/blog/${entry.slug}`}>
                         {entry.title}
@@ -192,6 +245,30 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                 </ul>
               </section>
             ) : null}
+
+            <section className="rounded-2xl border border-border bg-surface-card p-4">
+              <p className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-accent">Explore More</p>
+              <div className="flex flex-wrap gap-2">
+                <Link
+                  href="/projects"
+                  className="rounded-full border border-border px-3 py-1.5 text-xs text-text-secondary transition hover:border-accent/50 hover:text-text-primary"
+                >
+                  Projects
+                </Link>
+                <Link
+                  href="/insights"
+                  className="rounded-full border border-border px-3 py-1.5 text-xs text-text-secondary transition hover:border-accent/50 hover:text-text-primary"
+                >
+                  Insights Hub
+                </Link>
+                <Link
+                  href="/contact"
+                  className="rounded-full border border-accent/30 bg-accent-soft px-3 py-1.5 text-xs font-medium text-accent transition hover:border-accent hover:bg-accent hover:text-surface"
+                >
+                  Contact
+                </Link>
+              </div>
+            </section>
           </aside>
         </Container>
       </article>

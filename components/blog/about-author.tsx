@@ -23,6 +23,19 @@ export function AboutAuthor() {
         </div>
       </div>
       <p className="mt-4 text-sm leading-relaxed text-text-secondary">{authorProfile.longBio}</p>
+      <div className="mt-3 flex flex-wrap gap-2">
+        {authorProfile.social.map((item) => (
+          <a
+            key={item.href}
+            href={item.href}
+            target="_blank"
+            rel="noreferrer"
+            className="rounded-full border border-border px-3 py-1 text-xs text-text-secondary transition hover:border-accent/50 hover:text-text-primary"
+          >
+            {item.label}
+          </a>
+        ))}
+      </div>
       <div className="mt-4 flex flex-wrap gap-2">
         <Link
           href={authorProfile.aboutUrl}

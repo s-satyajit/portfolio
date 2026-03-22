@@ -7,22 +7,22 @@ export interface ProofStat {
 export const proofStats: ProofStat[] = [
   {
     label: "Shipped Projects",
-    value: "10+",
-    note: "Web products and technical experiments deployed publicly."
+    value: "6",
+    note: "Public web products and engineering experiments available to review."
   },
   {
     label: "Core Stack",
     value: "AI + Full-Stack",
-    note: "Python AI workflows plus React/Next.js and Node architecture."
+    note: "Applied AI workflows with React/Next.js and Node-based product delivery."
   },
   {
     label: "Research Track",
     value: "Active",
-    note: "Publication-oriented writing and AI implementation analysis."
+    note: "Ongoing publication-oriented writing and implementation analysis."
   },
   {
     label: "Availability",
     value: "Open",
-    note: "Internship, freelance, and full-time opportunities."
+    note: "Open to internship, freelance, and full-time opportunities."
   }
 ];

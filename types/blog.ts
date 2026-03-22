@@ -4,12 +4,16 @@ export interface BlogFrontmatter {
   subtitle?: string;
   excerpt: string;
   date: string;
+  updated?: string;
   category?: string;
   tags: string[];
+  audience?: "recruiter" | "engineer" | "client" | "general";
+  difficulty?: "beginner" | "intermediate" | "advanced";
   readTime?: string;
   cover?: string;
   coverAlt?: string;
   featured?: boolean;
+  featuredRank?: number;
   projectMentions?: string[];
   draft?: boolean;
   seoTitle?: string;

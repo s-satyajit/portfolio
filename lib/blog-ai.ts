@@ -1,6 +1,14 @@
 import { getBlogPostBySlug } from "@/lib/mdx";
 
-type BlogAIMode = "summary" | "takeaways" | "simple" | "faq" | "ask";
+type BlogAIMode =
+  | "summary"
+  | "takeaways"
+  | "simple"
+  | "faq"
+  | "recruiter-fit"
+  | "client-fit"
+  | "next-read"
+  | "ask";
 
 interface GenerateBlogAIInput {
   slug: string;
@@ -25,6 +33,12 @@ function modeInstruction(mode: BlogAIMode, question?: string): string {
       return "Explain the article in simple language for a non-expert engineer.";
     case "faq":
       return "Generate 5 useful FAQs with short answers based only on the article.";
+    case "recruiter-fit":
+      return "Explain why this article matters to a recruiter evaluating this engineer.";
+    case "client-fit":
+      return "Explain why this article matters to a potential client and what delivery signals it provides.";
+    case "next-read":
+      return "Recommend the next best content to read and justify the recommendation based on current article themes.";
     case "ask":
       return `Answer this question using only article context: ${question || ""}`;
     default:
@@ -38,6 +52,15 @@ function localFallback(mode: BlogAIMode, title: string, excerpt: string, questio
   }
   if (mode === "takeaways") {
     return `1. Understand the core problem first.\n2. Prefer maintainable architecture choices.\n3. Document tradeoffs clearly.\n4. Connect technical decisions to user value.`;
+  }
+  if (mode === "recruiter-fit") {
+    return `Recruiter lens: this article demonstrates problem framing, implementation clarity, and communication quality in engineering decisions.`;
+  }
+  if (mode === "client-fit") {
+    return `Client lens: this article indicates practical delivery thinking, scope clarity, and product-aware engineering decisions.`;
+  }
+  if (mode === "next-read") {
+    return `Next read recommendation: pick a related case study or project breakdown to connect this article's ideas with implementation outcomes.`;
   }
   if (mode === "faq") {
     return `Q: What is this article about?\nA: ${excerpt}\n\nQ: Who is this useful for?\nA: Engineers, recruiters, and technical readers exploring practical system thinking.`;

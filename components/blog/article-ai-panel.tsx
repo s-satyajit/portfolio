@@ -1,8 +1,17 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { Bot, Copy, RotateCcw } from "lucide-react";
 
-type BlogAIMode = "summary" | "takeaways" | "simple" | "faq" | "ask";
+type BlogAIMode =
+  | "summary"
+  | "takeaways"
+  | "simple"
+  | "faq"
+  | "recruiter-fit"
+  | "client-fit"
+  | "next-read"
+  | "ask";
 
 interface ArticleAIPanelProps {
   slug: string;
@@ -12,18 +21,30 @@ const modeLabels: Record<Exclude<BlogAIMode, "ask">, string> = {
   summary: "AI Summary",
   takeaways: "Key Takeaways",
   simple: "Simplify",
-  faq: "Generate FAQ"
+  faq: "Generate FAQ",
+  "recruiter-fit": "Recruiter Lens",
+  "client-fit": "Client Lens",
+  "next-read": "Suggest Next Read"
 };
+
+const suggestedQuestions = [
+  "What are the top 3 practical takeaways from this article?",
+  "How is this relevant for recruiters evaluating my profile?",
+  "How can a client use this thinking in a real project?",
+  "Which related article or case study should I read next?"
+];
 
 export function ArticleAIPanel({ slug }: ArticleAIPanelProps) {
   const [loadingMode, setLoadingMode] = useState<BlogAIMode | null>(null);
   const [answer, setAnswer] = useState("");
   const [question, setQuestion] = useState("");
   const [error, setError] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
 
   async function run(mode: BlogAIMode, inputQuestion?: string) {
     setLoadingMode(mode);
     setError(null);
+    setCopied(false);
     try {
       const response = await fetch("/api/blog-ai", {
         method: "POST",
@@ -48,14 +69,45 @@ export function ArticleAIPanel({ slug }: ArticleAIPanelProps) {
     await run("ask", question.trim());
   }
 
+  async function copyAnswer() {
+    if (!answer) return;
+    try {
+      await navigator.clipboard.writeText(answer);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      setCopied(false);
+    }
+  }
+
   return (
     <section className="rounded-2xl border border-border bg-surface-card p-5">
-      <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
-        AI Reading Assistant
-      </p>
-      <p className="mt-2 text-sm text-text-secondary">
-        Quick article summary, takeaways, simplified explanation, and contextual Q&A.
-      </p>
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <p className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent-soft px-3 py-1 text-xs font-medium text-accent">
+            <Bot size={14} />
+            AI Reading Assistant
+          </p>
+          <p className="mt-2 text-sm text-text-secondary">
+            Fast article summary, recruiter/client context, FAQs, and grounded Q&A.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => {
+            setAnswer("");
+            setQuestion("");
+            setError(null);
+            setCopied(false);
+          }}
+          className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1.5 text-xs text-text-secondary transition hover:border-accent/50 hover:text-text-primary"
+          disabled={!answer && !question}
+        >
+          <RotateCcw size={13} />
+          Clear
+        </button>
+      </div>
 
       <div className="mt-4 flex flex-wrap gap-2">
         {Object.entries(modeLabels).map(([mode, label]) => (
@@ -63,10 +115,24 @@ export function ArticleAIPanel({ slug }: ArticleAIPanelProps) {
             key={mode}
             type="button"
             onClick={() => run(mode as Exclude<BlogAIMode, "ask">)}
-            className="rounded-full border border-border px-3 py-1.5 text-xs text-text-secondary transition hover:border-accent/50 hover:text-text-primary"
+            className="rounded-full border border-border px-3 py-1.5 text-xs text-text-secondary transition hover:border-accent/50 hover:text-text-primary disabled:cursor-not-allowed disabled:opacity-60"
             disabled={loadingMode !== null}
           >
             {loadingMode === mode ? "..." : label}
+          </button>
+        ))}
+      </div>
+
+      <div className="mt-3 flex flex-wrap gap-2">
+        {suggestedQuestions.map((prompt) => (
+          <button
+            key={prompt}
+            type="button"
+            onClick={() => run("ask", prompt)}
+            className="rounded-full border border-border px-3 py-1.5 text-xs text-text-secondary transition hover:border-accent/50 hover:text-text-primary disabled:cursor-not-allowed disabled:opacity-60"
+            disabled={loadingMode !== null}
+          >
+            {prompt}
           </button>
         ))}
       </div>
@@ -89,8 +155,18 @@ export function ArticleAIPanel({ slug }: ArticleAIPanelProps) {
 
       {error ? <p className="mt-3 text-sm text-red-300">{error}</p> : null}
       {answer ? (
-        <div className="mt-4 rounded-xl border border-border bg-surface p-4 text-sm leading-relaxed text-text-secondary whitespace-pre-wrap">
-          {answer}
+        <div className="mt-4 rounded-xl border border-border bg-surface p-4">
+          <div className="mb-3 flex justify-end">
+            <button
+              type="button"
+              onClick={copyAnswer}
+              className="inline-flex items-center gap-1 rounded-full border border-border px-3 py-1 text-xs text-text-secondary transition hover:border-accent/50 hover:text-text-primary"
+            >
+              <Copy size={12} />
+              {copied ? "Copied" : "Copy"}
+            </button>
+          </div>
+          <p className="whitespace-pre-wrap text-sm leading-relaxed text-text-secondary">{answer}</p>
         </div>
       ) : null}
     </section>

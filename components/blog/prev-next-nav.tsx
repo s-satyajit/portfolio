@@ -19,6 +19,7 @@ export function PrevNextNav({ previous, next }: PrevNextNavProps) {
         >
           <p className="text-xs uppercase tracking-[0.16em] text-text-secondary">Previous</p>
           <p className="mt-1 font-heading text-lg">{previous.title}</p>
+          <p className="mt-1 text-xs text-text-secondary">{previous.readTime}</p>
         </Link>
       ) : (
         <div className="hidden sm:block" />
@@ -30,6 +31,7 @@ export function PrevNextNav({ previous, next }: PrevNextNavProps) {
         >
           <p className="text-xs uppercase tracking-[0.16em] text-text-secondary">Next</p>
           <p className="mt-1 font-heading text-lg">{next.title}</p>
+          <p className="mt-1 text-xs text-text-secondary">{next.readTime}</p>
         </Link>
       ) : null}
     </section>

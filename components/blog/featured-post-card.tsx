@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { BlogFrontmatter } from "@/types/blog";
+import { formatAudience, formatDifficulty } from "@/lib/blog-utils";
 import { formatDate } from "@/lib/utils";
 
 interface FeaturedPostCardProps {
@@ -22,14 +23,10 @@ export function FeaturedPostCard({ post }: FeaturedPostCardProps) {
         <p className="text-sm text-text-secondary">{post.excerpt}</p>
         <div className="flex flex-wrap gap-2 text-xs text-text-secondary">
           <span>{formatDate(post.date)}</span>
-          <span>•</span>
-          <span>{post.readTime}</span>
-          {post.category ? (
-            <>
-              <span>•</span>
-              <span>{post.category}</span>
-            </>
-          ) : null}
+          {post.readTime ? <span>{post.readTime}</span> : null}
+          {post.category ? <span>{post.category}</span> : null}
+          {post.difficulty ? <span>{formatDifficulty(post.difficulty)}</span> : null}
+          {post.audience ? <span>{formatAudience(post.audience)}</span> : null}
         </div>
         <Link
           href={`/blog/${post.slug}`}

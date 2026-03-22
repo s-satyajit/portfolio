@@ -27,12 +27,16 @@ const blogSchema = z.object({
   subtitle: z.string().optional(),
   excerpt: z.string(),
   date: dateStringSchema,
+  updated: dateStringSchema.optional(),
   category: z.string().optional(),
   tags: z.array(z.string()).default([]),
+  audience: z.enum(["recruiter", "engineer", "client", "general"]).optional(),
+  difficulty: z.enum(["beginner", "intermediate", "advanced"]).optional(),
   readTime: z.string().optional(),
   cover: z.string().optional(),
   coverAlt: z.string().optional(),
   featured: z.boolean().optional().default(false),
+  featuredRank: z.number().int().positive().optional(),
   projectMentions: z.array(z.string()).optional().default([]),
   draft: z.boolean().optional().default(false),
   seoTitle: z.string().optional(),
@@ -235,7 +239,7 @@ function headingId(text: string): string {
     .replace(/\s+/g, "-");
 }
 
-export function extractBlogHeadings(source: string): BlogHeading[] {
+export function extractMdxHeadings(source: string): BlogHeading[] {
   const headings: BlogHeading[] = [];
   const lines = source.split("\n");
 
@@ -254,3 +258,5 @@ export function extractBlogHeadings(source: string): BlogHeading[] {
 
   return headings;
 }
+
+export const extractBlogHeadings = extractMdxHeadings;

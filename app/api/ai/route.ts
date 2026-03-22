@@ -8,8 +8,24 @@ import { AIRequestBody } from "@/types/ai";
 const requestSchema = z.object({
   query: z.string().min(3).max(500),
   persona: z.enum(["recruiter", "client", "collaborator", "general"]).optional(),
-  mode: z.enum(["homepage", "recruiter", "project", "about"]).optional(),
-  projectSlug: z.string().min(1).max(120).optional()
+  mode: z
+    .enum([
+      "homepage",
+      "recruiter",
+      "project",
+      "about",
+      "contact",
+      "resume",
+      "blog",
+      "research",
+      "case-study",
+      "insights",
+      "services",
+      "experience"
+    ])
+    .optional(),
+  projectSlug: z.string().min(1).max(120).optional(),
+  entrySlug: z.string().min(1).max(160).optional()
 });
 
 function getClientKey(request: NextRequest): string {
@@ -48,10 +64,23 @@ export async function POST(request: NextRequest) {
     );
   }
 
+  if (
+    (parsed.data.mode === "blog" ||
+      parsed.data.mode === "research" ||
+      parsed.data.mode === "case-study") &&
+    !parsed.data.entrySlug
+  ) {
+    return NextResponse.json(
+      { message: "Entry slug is required for this page mode." },
+      { status: 400 }
+    );
+  }
+
   const result = await generatePortfolioAnswer(parsed.data.query, {
     persona: parsed.data.persona,
     mode: parsed.data.mode,
-    projectSlug: parsed.data.projectSlug
+    projectSlug: parsed.data.projectSlug,
+    entrySlug: parsed.data.entrySlug
   });
   return NextResponse.json(result, { status: 200 });
 }

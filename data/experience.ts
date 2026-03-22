@@ -2,6 +2,21 @@ import { ExperienceItem } from "@/types/experience";
 
 export const experienceTimeline: ExperienceItem[] = [
   {
+    id: "eduskills-foundation",
+    role: "Software Development Intern",
+    company: "EduSkills Foundation",
+    type: "internship",
+    location: "Remote",
+    startDate: "2023-07-01",
+    endDate: "2024-06-30",
+    highlights: [
+      "Completed one year of software development work across frontend delivery and API integration.",
+      "Contributed to feature implementation, iteration cycles, and production-minded code quality.",
+      "Collaborated with mentors and team members to ship reliable, maintainable modules."
+    ],
+    tech: ["React", "Node.js", "Express", "MongoDB"]
+  },
+  {
     id: "freelance-web",
     role: "Freelance Full-Stack Developer",
     company: "Independent Client Work",

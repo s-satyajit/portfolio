@@ -6,7 +6,16 @@ import { checkRateLimit } from "@/lib/rate-limit";
 
 const blogAIRequestSchema = z.object({
   slug: z.string().min(1),
-  mode: z.enum(["summary", "takeaways", "simple", "faq", "ask"]),
+  mode: z.enum([
+    "summary",
+    "takeaways",
+    "simple",
+    "faq",
+    "recruiter-fit",
+    "client-fit",
+    "next-read",
+    "ask"
+  ]),
   question: z.string().max(300).optional()
 });
 

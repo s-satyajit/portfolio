@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { BlogFrontmatter } from "@/types/blog";
+import { formatAudience, formatDifficulty } from "@/lib/blog-utils";
 import { formatDate } from "@/lib/utils";
 
 interface BlogCardProps {
@@ -29,15 +30,26 @@ export function BlogCard({ post }: BlogCardProps) {
       <div className="space-y-3">
         <div className="flex flex-wrap items-center gap-2 text-xs text-text-secondary">
           <span>{formatDate(post.date)}</span>
-          <span>•</span>
-          <span>{post.readTime}</span>
+          {post.readTime ? <span>{post.readTime}</span> : null}
           {post.category ? (
-            <>
-              <span>•</span>
-              <span className="rounded-full border border-border px-2 py-0.5 uppercase tracking-[0.14em]">
-                {post.category}
-              </span>
-            </>
+            <span className="rounded-full border border-border px-2 py-0.5 uppercase tracking-[0.14em]">
+              {post.category}
+            </span>
+          ) : null}
+          {post.difficulty ? (
+            <span className="rounded-full border border-border px-2 py-0.5">
+              {formatDifficulty(post.difficulty)}
+            </span>
+          ) : null}
+          {post.audience ? (
+            <span className="rounded-full border border-border px-2 py-0.5">
+              {formatAudience(post.audience)}
+            </span>
+          ) : null}
+          {post.draft ? (
+            <span className="rounded-full border border-amber-400/35 bg-amber-500/10 px-2 py-0.5 text-amber-200">
+              Draft
+            </span>
           ) : null}
         </div>
         <h3 className="font-heading text-2xl leading-tight">

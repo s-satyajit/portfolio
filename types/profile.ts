@@ -8,10 +8,44 @@ export interface EducationItem {
 }
 
 export interface Availability {
-  internships: boolean;
   freelance: boolean;
   fullTime: boolean;
   note: string;
+}
+
+export interface AboutIntro {
+  intro: string;
+  direction: string;
+  longTerm: string;
+}
+
+export interface FocusNowItem {
+  title: string;
+  detail: string;
+  nextStep?: string;
+}
+
+export interface JourneyItem {
+  id: string;
+  period: string;
+  title: string;
+  description: string;
+}
+
+export interface BuildCategory {
+  title: string;
+  summary: string;
+  examples?: string[];
+}
+
+export interface StackCategory {
+  title: string;
+  items: string[];
+}
+
+export interface PersonalNote {
+  heading: string;
+  paragraphs: string[];
 }
 
 export interface Profile {
@@ -30,4 +64,14 @@ export interface Profile {
   availability: Availability;
   interests: string[];
   currentlyFocusing: string[];
+  aboutIntro: AboutIntro;
+  focusNow: FocusNowItem[];
+  journey: JourneyItem[];
+  buildingMindset: string[];
+  buildCategories: BuildCategory[];
+  stackByCategory: StackCategory[];
+  workPrinciples: string[];
+  personalNote: PersonalNote;
+  opportunityTargets: string[];
+  aboutAIPrompts: string[];
 }

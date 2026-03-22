@@ -1,57 +1,60 @@
-import Link from "next/link";
-
+import { InsightsAIPanel } from "@/components/insights/insights-ai-panel";
+import { InsightsExplorer } from "@/components/insights/insights-explorer";
 import { Container } from "@/components/layout/container";
 import { ButtonLink } from "@/components/ui/button-link";
 import { PageHeader } from "@/components/ui/page-header";
+import { caseStudyToInsightItem, sortInsightsByDateDesc } from "@/lib/insights";
 import { getAllCaseStudies } from "@/lib/mdx";
 import { buildPageMetadata } from "@/lib/seo";
-import { formatDate } from "@/lib/utils";
 
 export const metadata = buildPageMetadata({
   title: "Case Studies",
   description:
-    "Case studies and technical analyses from product and architecture decisions by Satyajit Samal.",
+    "Advanced case-study workspace with architecture decisions, tradeoff analysis, and grounded AI assistance.",
   path: "/case-studies"
 });
 
 export default async function CaseStudiesPage() {
   const entries = await getAllCaseStudies(true);
+  const items = sortInsightsByDateDesc(entries.map(caseStudyToInsightItem));
 
   return (
     <>
       <PageHeader
         eyebrow="Case Studies"
-        title="How I reason through product and system decisions"
-        description="Structured analyses designed to show problem framing, alternatives, and final implementation choices."
+        title="Decision-by-decision architecture and product analysis"
+        description="Explore how problems were framed, options evaluated, and implementation choices justified."
+        actions={
+          <>
+            <ButtonLink href="/insights" variant="secondary">
+              All Insights
+            </ButtonLink>
+            <ButtonLink href="/research" variant="secondary">
+              Research
+            </ButtonLink>
+          </>
+        }
       />
-      <Container className="pb-20">
-        <div className="space-y-4">
-          {entries.map((entry) => (
-            <article key={entry.slug} className="rounded-2xl border border-border bg-surface-card p-5">
-              <h2 className="font-heading text-2xl">
-                <Link href={`/case-studies/${entry.slug}`} className="hover:text-accent">
-                  {entry.title}
-                </Link>
-              </h2>
-              <p className="mt-2 text-sm text-text-secondary">{entry.context}</p>
-              <p className="mt-2 text-sm text-text-secondary">
-                <span className="text-text-primary">Conclusion: </span>
-                {entry.conclusion}
-              </p>
-              <p className="mt-3 text-xs text-text-secondary">{formatDate(entry.date)}</p>
-              <div className="mt-3 flex flex-wrap items-center gap-3">
-                <Link href={`/case-studies/${entry.slug}`} className="text-sm text-accent hover:text-cyan-300">
-                  Read full case study
-                </Link>
-                {entry.pdf ? (
-                  <ButtonLink href={entry.pdf} variant="secondary" external className="px-3 py-1.5 text-xs">
-                    Open PDF
-                  </ButtonLink>
-                ) : null}
-              </div>
-            </article>
-          ))}
-        </div>
+
+      <Container className="space-y-10 pb-20">
+        <InsightsExplorer
+          items={items}
+          mode="case-study"
+          heading="Case Study Explorer"
+          helperText="Filter by tags and timeline to inspect product reasoning, architecture clarity, and execution quality."
+        />
+
+        <InsightsAIPanel
+          kind="hub"
+          heading="Ask AI about case-study strengths"
+          helperText="Get quick comparative views across system design choices, conclusions, and recruiter relevance."
+          suggestedQuestions={[
+            "Which case study is strongest for backend reasoning?",
+            "Which case study best shows product thinking?",
+            "What recurring engineering lesson appears across case studies?",
+            "Which case study should a recruiter read first?"
+          ]}
+        />
       </Container>
     </>
   );

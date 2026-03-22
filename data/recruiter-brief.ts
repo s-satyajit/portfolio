@@ -50,6 +50,7 @@ export const recruiterHero = {
     "A grounded view of what I have built, where I fit best, and how I can contribute early in a product team.",
   summaryLines: [
     `I am ${profile.name}, currently pursuing ${ongoingProgram.degree} in ${ongoingProgram.field} at ${ongoingProgram.institution}.`,
+    "I have 1 year of software development experience at EduSkills Foundation.",
     "I build full-stack web products with React/Next.js on the frontend and Node/Express workflows on the backend.",
     "My current direction is applied AI in real product flows, especially grounded assistant experiences that stay useful and factual."
   ]
@@ -107,12 +108,16 @@ export const recruiterQuickFacts: RecruiterFact[] = [
     value: "AI-assisted product features, grounded Q&A workflows, and deployment-ready full-stack delivery"
   },
   {
+    label: "Experience",
+    value: "1 year software development experience at EduSkills Foundation"
+  },
+  {
     label: "Preferred Roles",
     value: "Frontend Developer, Full-Stack Developer, Applied AI Engineer (Entry Level)"
   },
   {
     label: "Open To",
-    value: "Internships, freelance projects, and full-time roles"
+    value: "freelance projects, and full-time roles"
   },
   ...(github ? [{ label: "GitHub", value: "github.com/s-satyajit", href: github }] : []),
   ...(linkedIn
