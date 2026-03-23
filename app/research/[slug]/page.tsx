@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { ReadingProgress } from "@/components/blog/reading-progress";
 import { TableOfContents } from "@/components/blog/table-of-contents";
 import { InsightsAIPanel } from "@/components/insights/insights-ai-panel";
 import { Container } from "@/components/layout/container";
 import { PageBackButton } from "@/components/layout/page-back-button";
+import { DeviceMockupShowcase } from "@/components/mdx/device-mockup-showcase";
 import { ButtonLink } from "@/components/ui/button-link";
 import { DocumentShowcase } from "@/components/ui/document-showcase";
 import { SchemaScript } from "@/components/ui/schema-script";
@@ -97,7 +97,6 @@ export default async function ResearchDetailPage({ params }: ResearchDetailPageP
 
   return (
     <>
-      <ReadingProgress />
       <SchemaScript
         schema={[
           articleSchema({
@@ -137,6 +136,16 @@ export default async function ResearchDetailPage({ params }: ResearchDetailPageP
               <h1 className="mt-4 font-heading text-4xl leading-tight sm:text-5xl">{entry.title}</h1>
               <p className="mt-4 text-sm leading-relaxed text-text-secondary">{entry.summary}</p>
             </header>
+
+            {entry.laptopImage && entry.mobileImage ? (
+              <DeviceMockupShowcase
+                laptopImage={entry.laptopImage}
+                mobileImage={entry.mobileImage}
+                alt={entry.mockupAlt || entry.title}
+                caption={entry.mockupCaption}
+                mobileSide={entry.mockupMobileSide}
+              />
+            ) : null}
 
             <section className="grid gap-4 sm:grid-cols-2">
               <article className="rounded-2xl border border-border bg-surface-card p-5">

@@ -1,0 +1,68 @@
+---
+slug: lsb-steganography-security-analysis
+title: Securing Image Information with LSB Steganography
+subtitle: MATLAB-based steganography workflow with imperceptibility and detectability trade-offs.
+overview: This case study analyzes Least Significant Bit (LSB) image steganography from implementation flow to security limits, with focus on payload quality trade-offs and practical hardening direction.
+context: The source report examines text embedding in digital images using LSB substitution and evaluates quality/security implications.
+problem: Enable covert image-based message embedding while preserving visual quality and understanding detectability risks.
+approach: The analysis follows end-to-end embedding/extraction workflow and evaluates image quality signals and steganalysis exposure.
+analysis: Focused on MATLAB-based implementation flow, imperceptibility metrics, and known vulnerabilities of basic LSB schemes.
+conclusion: Basic LSB can preserve visual quality, but secure usage requires stronger hardening (for example encrypted payloads and robust embedding variants).
+toolsOrMethods:
+  - MATLAB image-processing workflow
+  - LSB embed/extract pipeline analysis
+  - Image-quality and detectability trade-off review
+pdf: /case-studies/Securing_Image_Information_with_LSB_Steganography.pdf
+pdfReferences:
+  - label: ADSA submission version
+    href: /case-studies/Satyajit_Samal_ADSA_Case_Study_1.pdf
+keyInsights:
+  - LSB offers straightforward high-capacity hiding with low visible distortion.
+  - Simplicity also makes baseline LSB vulnerable to steganalysis and image manipulation.
+  - Security posture improves when steganography is combined with payload encryption.
+learnings:
+  - Imperceptibility alone is not a sufficient security criterion.
+  - Security evaluation must include both visual and statistical attack surfaces.
+featured: true
+date: 2026-03-02
+tags:
+  - cybersecurity
+  - steganography
+  - image-processing
+  - case-study
+draft: false
+---
+
+## Problem Framing
+
+Steganography differs from cryptography in objective: it attempts to hide message existence itself. The challenge is balancing payload capacity, visual quality, and resistance to detection.
+
+## Analytical Focus
+
+This case study concentrates on:
+
+- LSB embedding and extraction workflow
+- Visual quality preservation under payload changes
+- Security limitations under statistical and manipulation-based attacks
+
+## Methodology Lens
+
+- Implement LSB-based message embedding in an image workflow.
+- Validate extraction correctness.
+- Review image quality behavior and security exposure in baseline setup.
+- Compare practical implications of plain LSB versus hardened variants.
+
+## Key Technical Notes
+
+- LSB is implementation-friendly and useful for educational/prototyping contexts.
+- Baseline LSB remains vulnerable to dedicated steganalysis strategies.
+- Hybrid approaches (for example encrypted payload before embedding) provide stronger practical security posture.
+
+## Conclusion
+
+LSB steganography is a useful foundational method, but not a complete security solution in isolation. Production-grade use requires layered defenses and stricter threat-aware evaluation.
+
+## Next Iteration
+
+- Extend analysis to robust embedding alternatives beyond baseline LSB.
+- Add explicit attack-scenario benchmarking for security comparison.

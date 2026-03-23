@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { FloatingAssistant } from "@/components/ai/floating-assistant";
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
+import { ScrollProgressBar } from "@/components/ui/scroll-progress-bar";
 
 interface SiteShellProps {
   children: ReactNode;
@@ -17,6 +18,7 @@ export function SiteShell({ children }: SiteShellProps) {
       >
         Skip to content
       </a>
+      <ScrollProgressBar />
       <Navbar />
       <main id="main-content" className="flex-1">
         {children}

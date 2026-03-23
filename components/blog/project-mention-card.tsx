@@ -1,12 +1,13 @@
 import Link from "next/link";
 
-import { projects } from "@/data/projects";
+import { getProjects } from "@/data/projects";
 
 interface ProjectMentionCardProps {
   slugs: string[];
 }
 
 export function ProjectMentionCard({ slugs }: ProjectMentionCardProps) {
+  const projects = getProjects();
   const related = projects.filter((project) => slugs.includes(project.slug));
   if (related.length === 0) return null;
 

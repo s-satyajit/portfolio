@@ -23,6 +23,6 @@ export const proofStats: ProofStat[] = [
   {
     label: "Availability",
     value: "Open",
-    note: "Open to internship, freelance, and full-time opportunities."
+    note: "Open to freelance, and full-time opportunities."
   }
 ];

@@ -9,9 +9,12 @@ export interface InsightItem {
   kind: InsightKind;
   slug: string;
   title: string;
+  subtitle?: string;
   date: string;
   tags: string[];
   summary: string;
+  overview?: string;
+  focusArea?: string;
   status?: ResearchStatus;
   venue?: string;
   contribution?: string;

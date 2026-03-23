@@ -1,4 +1,5 @@
 import matter from "gray-matter";
+import type { MDXComponents } from "mdx/types";
 import { compileMDX } from "next-mdx-remote/rsc";
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -9,8 +10,10 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import { z } from "zod";
 
+import { mdxComponents } from "@/components/mdx/mdx-components";
 import { BlogFrontmatter, BlogHeading, BlogPost } from "@/types/blog";
 import { CaseStudyEntry, CaseStudyFrontmatter } from "@/types/case-study";
+import { ProjectContentEntry, ProjectContentFrontmatter } from "@/types/project-content";
 import { ResearchEntry, ResearchFrontmatter } from "@/types/research";
 
 const CONTENT_ROOT = path.join(process.cwd(), "content");
@@ -20,6 +23,13 @@ const dateStringSchema = z.preprocess((value) => {
   }
   return value;
 }, z.string());
+const mockupFields = {
+  laptopImage: z.string().optional(),
+  mobileImage: z.string().optional(),
+  mockupAlt: z.string().optional(),
+  mockupCaption: z.string().optional(),
+  mockupMobileSide: z.enum(["left", "right"]).optional()
+};
 
 const blogSchema = z.object({
   slug: z.string().optional(),
@@ -40,7 +50,8 @@ const blogSchema = z.object({
   projectMentions: z.array(z.string()).optional().default([]),
   draft: z.boolean().optional().default(false),
   seoTitle: z.string().optional(),
-  seoDescription: z.string().optional()
+  seoDescription: z.string().optional(),
+  ...mockupFields
 });
 
 const researchSchema = z.object({
@@ -66,30 +77,57 @@ const researchSchema = z.object({
       external: z.string().optional()
     })
     .optional(),
-  draft: z.boolean().optional().default(false)
+  draft: z.boolean().optional().default(false),
+  ...mockupFields
 });
 
 const caseStudySchema = z.object({
   slug: z.string().optional(),
   title: z.string(),
+  subtitle: z.string().optional(),
+  overview: z.string().optional(),
+  focusArea: z.string().optional(),
   context: z.string(),
   problem: z.string(),
+  approach: z.string().optional(),
   analysis: z.string(),
   conclusion: z.string(),
+  nextIteration: z.array(z.string()).optional().default([]),
+  toolsOrMethods: z.array(z.string()).optional().default([]),
   pdf: z.string().optional(),
+  pdfReferences: z
+    .array(
+      z.object({
+        label: z.string(),
+        href: z.string()
+      })
+    )
+    .optional()
+    .default([]),
   keyInsights: z.array(z.string()).default([]),
   learnings: z.array(z.string()).default([]),
+  featured: z.boolean().optional().default(false),
+  coverImage: z.string().optional(),
   date: dateStringSchema,
   tags: z.array(z.string()).default([]),
-  draft: z.boolean().optional().default(false)
+  draft: z.boolean().optional().default(false),
+  ...mockupFields
 });
 
-function getDirectory(collection: "blog" | "research" | "case-studies"): string {
+const projectContentSchema = z.object({
+  slug: z.string().optional(),
+  title: z.string().optional(),
+  mockupTitle: z.string().optional(),
+  draft: z.boolean().optional().default(false),
+  ...mockupFields
+});
+
+function getDirectory(collection: "blog" | "research" | "case-studies" | "projects"): string {
   return path.join(CONTENT_ROOT, collection);
 }
 
 async function getCollectionFileNames(
-  collection: "blog" | "research" | "case-studies"
+  collection: "blog" | "research" | "case-studies" | "projects"
 ): Promise<string[]> {
   const directory = getDirectory(collection);
   const files = await fs.readdir(directory);
@@ -100,7 +138,10 @@ function slugFromFileName(fileName: string): string {
   return fileName.replace(/\.mdx$/, "");
 }
 
-async function readMdxFile(collection: "blog" | "research" | "case-studies", slug: string) {
+async function readMdxFile(
+  collection: "blog" | "research" | "case-studies" | "projects",
+  slug: string
+) {
   const filePath = path.join(getDirectory(collection), `${slug}.mdx`);
   const file = await fs.readFile(filePath, "utf8");
   return matter(file);
@@ -213,9 +254,46 @@ export async function getCaseStudyBySlug(slug: string): Promise<CaseStudyEntry |
   }
 }
 
-export async function renderMdx(source: string) {
+export async function getAllProjectContent(
+  includeDraft = false
+): Promise<ProjectContentFrontmatter[]> {
+  const fileNames = await getCollectionFileNames("projects");
+  const entries = await Promise.all(
+    fileNames.map(async (fileName) => {
+      const slug = slugFromFileName(fileName);
+      const file = await readMdxFile("projects", slug);
+      const parsed = projectContentSchema.parse(file.data);
+      return {
+        ...parsed,
+        slug: parsed.slug || slug
+      } satisfies ProjectContentFrontmatter;
+    })
+  );
+
+  return entries.filter((item) => (includeDraft ? true : !item.draft));
+}
+
+export async function getProjectContentBySlug(slug: string): Promise<ProjectContentEntry | null> {
+  try {
+    const file = await readMdxFile("projects", slug);
+    const parsed = projectContentSchema.parse(file.data);
+    return {
+      ...parsed,
+      slug: parsed.slug || slug,
+      content: file.content
+    };
+  } catch {
+    return null;
+  }
+}
+
+export async function renderMdx(source: string, components: MDXComponents = {}) {
   const { content } = await compileMDX({
     source,
+    components: {
+      ...mdxComponents,
+      ...components
+    },
     options: {
       parseFrontmatter: false,
       mdxOptions: {

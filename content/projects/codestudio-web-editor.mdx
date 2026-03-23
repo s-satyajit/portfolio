@@ -1,0 +1,59 @@
+---
+slug: codestudio-web-editor
+title: CodeStudio - Web Code Editor
+summary: A browser code editor with live preview and syntax-oriented workflow.
+description: CodeStudio enables editing HTML/CSS/JS in-browser with instant visual feedback and developer-centric ergonomics.
+problem: Quick frontend experimentation often requires local setup overhead.
+solution: Built a web editor that reduces setup friction with instant render feedback for frontend iteration.
+features:
+  - HTML/CSS/JS editing panes
+  - Live preview rendering
+  - Developer-friendly layout
+  - Lightweight in-browser coding flow
+techStack:
+  - React
+  - JavaScript
+  - Tailwind CSS
+architecture:
+  - Split-pane editor composition
+  - Preview rendering pipeline
+  - Local state-driven source synchronization
+links:
+  github: https://github.com/s-satyajit/WebCodeEditor
+  live: https://web-code-editor-sigma.vercel.app/
+featured: false
+showOnHomepage: false
+hasCaseStudy: false
+category: frontend
+status: live
+outcomes:
+  - label: Use Case
+    value: Rapid frontend prototyping
+lessonsLearned:
+  - Preview rendering must be isolated carefully for predictable behavior.
+mockupAlt: CodeStudio in-browser editor and preview on desktop and mobile
+mockupCaption: Rapid frontend prototyping workspace in a browser-native interface.
+mockupMobileSide: right
+order: 4
+draft: false
+---
+
+## Product Context
+
+CodeStudio reduces setup friction for quick frontend experiments by providing an in-browser editor with live output feedback.
+
+## Engineering Focus
+
+- Split-pane editing and preview surface
+- Fast source synchronization between panes
+- Lightweight experience for rapid iteration
+
+## Build Decisions
+
+The implementation prioritizes interaction speed and predictable preview rendering, so users can iterate on ideas without local setup overhead.
+
+## What I Would Improve Next
+
+- Add project templates and snippets
+- Introduce autosave and session persistence
+- Support collaboration and shareable sessions

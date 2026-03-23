@@ -17,7 +17,7 @@ export const profile: Profile = {
       degree: "Master of Engineering",
       institution: "Chandigarh University",
       field: "Artificial Intelligence",
-      startYear: 2024,
+      startYear: 2025,
       status: "ongoing"
     },
     {
@@ -85,102 +85,47 @@ export const profile: Profile = {
       period: "2020 - 2024",
       title: "B.Tech in Computer Science and Engineering",
       description:
-        "Built my software foundation through full-stack projects, frontend implementation, and backend workflow practice."
+        "Built my engineering foundation through full-stack projects, frontend implementation, backend workflows, and core system fundamentals."
     },
     {
-      id: "journey-product-foundation",
-      period: "2023 - 2024",
-      title: "Moved from tutorials to product workflows",
+      id: "journey-eduskills",
+      period: "2024 - 2025",
+      title: "Software Developer - EduSkills Foundation",
       description:
-        "Started focusing on real user journeys, role-based interfaces, and end-to-end delivery instead of isolated feature demos."
-    },
-    {
-      id: "journey-ai-shift",
-      period: "2024",
-      title: "Shifted focus toward applied AI",
-      description:
-        "Became more interested in integrating AI into practical software where accuracy, trust, and UX quality matter."
+        "Completed one year of software development experience focused on feature implementation, API integration, and delivery discipline in practical product workflows."
     },
     {
       id: "journey-me-ai",
-      period: "2024 - Present",
-      title: "M.E. in Artificial Intelligence at Chandigarh University",
+      period: "2025 - Present",
+      title: "M.E. in Artificial Intelligence - Chandigarh University",
       description:
-        "Expanding depth in AI while continuing to ship full-stack projects and technical writing."
+        "Now deepening AI understanding while continuing to build full-stack products with stronger architecture, grounded AI behavior, and production-minded execution."
     },
     {
       id: "journey-next",
       period: "Now -> Next",
-      title: "Shipping stronger AI-enabled products",
+      title: "Now to next: AI-focused product engineering",
       description:
-        "Targeting internship, freelance, and full-time opportunities where I can contribute to production-grade AI and full-stack systems."
-    }
-  ],
-  buildingMindset: [
-    "I prefer building software that solves a real workflow problem over shipping visual-only demos.",
-    "I care about both interface quality and the system behind it, including API design, state flow, and maintainability.",
-    "I use AI where it improves user outcomes, and I avoid adding it as a feature without clear product value.",
-    "I learn fastest by building, writing, and iterating on real implementations."
-  ],
-  buildCategories: [
-    {
-      title: "Full-stack web applications",
-      summary:
-        "Role-aware products that combine frontend clarity, backend APIs, and complete user workflows.",
-      examples: ["Hiring platforms", "Workflow tools", "Operations interfaces"]
-    },
-    {
-      title: "Dashboards and operational systems",
-      summary:
-        "Data-oriented interfaces that help teams monitor, manage, and act with less friction.",
-      examples: ["Admin panels", "Inventory and employee systems"]
-    },
-    {
-      title: "Auth and role-based experiences",
-      summary:
-        "User-specific access patterns, protected routes, and role boundaries that stay clear as a product grows.",
-      examples: ["Recruiter-candidate flow separation", "Protected feature areas"]
-    },
-    {
-      title: "AI-assisted product features",
-      summary:
-        "Context-grounded assistants and AI-enhanced flows designed for usefulness, safety, and trust.",
-      examples: ["Grounded portfolio Q&A", "Prompt-constrained summaries"]
-    },
-    {
-      title: "Engineering experiments with product intent",
-      summary:
-        "Short-cycle builds to test technical assumptions before scaling implementation.",
-      examples: ["Realtime interaction systems", "Tooling experiments"]
+        "Focused on building practical AI-powered systems and contributing through internship, freelance, and full-time opportunities where execution quality and product thinking matter."
     }
   ],
   stackByCategory: [
     {
-      title: "Frontend",
-      items: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"]
+      title: "Languages",
+      items: ["Python", "C++", "JavaScript", "TypeScript", "SQL"]
     },
     {
-      title: "Backend",
-      items: ["Node.js", "Express", "REST APIs", "Authentication workflows"]
+      title: "Cloud / DevOps / Databases",
+      items: ["AWS", "Lambda", "S3", "Docker", "Kubernetes", "MongoDB", "PostgreSQL", "Git"]
     },
     {
-      title: "Database",
-      items: ["MongoDB", "Schema design fundamentals"]
+      title: "Web / API",
+      items: ["React.js", "Redux", "Node.js", "Express.js", "FastAPI", "Tailwind CSS", "REST API"]
     },
     {
-      title: "AI / Tools",
-      items: ["Python", "PyTorch", "TensorFlow", "Gemini API", "Prompt grounding"]
-    },
-    {
-      title: "Deployment / Workflow",
-      items: ["Vercel", "GitHub", "Docker basics", "Postman", "CI-minded delivery"]
+      title: "AI / ML",
+      items: ["TensorFlow", "Flask", "Pandas", "NumPy", "Scikit-learn", "Deep Learning", "LLMs"]
     }
-  ],
-  workPrinciples: [
-    "Build real products, not portfolio theater.",
-    "Keep interfaces simple, but make system boundaries explicit.",
-    "Prefer grounded AI behavior over impressive but unreliable output.",
-    "Ship, review, improve, and repeat."
   ],
   personalNote: {
     heading: "What drives me",

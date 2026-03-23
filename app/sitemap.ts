@@ -1,10 +1,12 @@
 import { MetadataRoute } from "next";
 
-import { projects } from "@/data/projects";
+import { getProjects } from "@/data/projects";
 import { seoConfig } from "@/data/seo";
 import { getAllBlogPosts, getAllCaseStudies, getAllResearchEntries } from "@/lib/mdx";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const projects = getProjects();
+
   const [blogPosts, researchEntries, caseStudies] = await Promise.all([
     getAllBlogPosts(true),
     getAllResearchEntries(true),

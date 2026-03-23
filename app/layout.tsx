@@ -66,9 +66,14 @@ export const viewport: Viewport = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const suppressHydrationWarning = process.env.NODE_ENV !== "production";
+
   return (
     <html lang="en">
-      <body className={`${headingFont.variable} ${bodyFont.variable} ${monoFont.variable}`}>
+      <body
+        suppressHydrationWarning={suppressHydrationWarning}
+        className={`${headingFont.variable} ${bodyFont.variable} ${monoFont.variable}`}
+      >
         <SchemaScript schema={[personSchema(), websiteSchema()]} />
         <SiteShell>{children}</SiteShell>
       </body>

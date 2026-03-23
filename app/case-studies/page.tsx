@@ -10,7 +10,7 @@ import { buildPageMetadata } from "@/lib/seo";
 export const metadata = buildPageMetadata({
   title: "Case Studies",
   description:
-    "Advanced case-study workspace with architecture decisions, tradeoff analysis, and grounded AI assistance.",
+    "Summary-first case-study workspace with architecture decisions, key insights, and source PDFs as supporting depth.",
   path: "/case-studies"
 });
 
@@ -41,7 +41,7 @@ export default async function CaseStudiesPage() {
           items={items}
           mode="case-study"
           heading="Case Study Explorer"
-          helperText="Filter by tags and timeline to inspect product reasoning, architecture clarity, and execution quality."
+          helperText="Scan summaries, themes, and tags first. Open a case study for full analysis and optional source PDF depth."
         />
 
         <InsightsAIPanel

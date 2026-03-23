@@ -32,12 +32,6 @@ export interface JourneyItem {
   description: string;
 }
 
-export interface BuildCategory {
-  title: string;
-  summary: string;
-  examples?: string[];
-}
-
 export interface StackCategory {
   title: string;
   items: string[];
@@ -67,10 +61,7 @@ export interface Profile {
   aboutIntro: AboutIntro;
   focusNow: FocusNowItem[];
   journey: JourneyItem[];
-  buildingMindset: string[];
-  buildCategories: BuildCategory[];
   stackByCategory: StackCategory[];
-  workPrinciples: string[];
   personalNote: PersonalNote;
   opportunityTargets: string[];
   aboutAIPrompts: string[];

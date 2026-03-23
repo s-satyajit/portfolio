@@ -1,10 +1,17 @@
 ---
 slug: hirrd-product-architecture
 title: Hirrd - Product Architecture Case Study
+subtitle: Role-first product architecture for recruiter and candidate workflows.
+overview: This case study documents how I structured product boundaries, routing contracts, and workflow clarity for a dual-role hiring platform.
 context: A job platform concept requiring dual user flows for recruiters and candidates.
 problem: Build a hiring workflow that stays simple while handling role-specific functionality.
+approach: I compared a shared conditional-flow approach against role-isolated routes and API boundaries, then prioritized explicit separation for maintainability.
 analysis: Compared role-isolated vs unified-flow architecture and selected role-isolated patterns for clarity and maintainability.
 conclusion: Role-first architecture improved UX clarity and reduced API ambiguity.
+toolsOrMethods:
+  - Role-based route design
+  - API contract boundary mapping
+  - Information hierarchy analysis
 keyInsights:
   - User-role boundaries should shape routing and API contracts early.
   - Information hierarchy is a hiring-product advantage, not just a visual concern.
@@ -16,24 +23,47 @@ tags:
   - case-study
   - architecture
   - full-stack
+laptopImage: /images/projects/hirrd.png
+mobileImage: /images/projects/chat-app.png
+mockupAlt: Hirrd hiring workflow interface
+mockupCaption: Desktop and mobile preview composition for the Hirrd product flow.
+mockupMobileSide: right
 draft: false
 ---
 
-## Context
+## Overview
+
+Hirrd needed to support two user groups with different intents while keeping the product language consistent. The core design question was whether to unify interaction patterns in one conditional interface or separate them by role at both navigation and API levels.
+
+## Problem Framing
 
 The platform needed to support two audiences with different intents:
 
 - Recruiters posting and reviewing
 - Candidates discovering and applying
 
-## Options Considered
+Without clear boundaries, role confusion appears quickly in dashboards, permissions, and endpoint design.
+
+## Architecture Options Considered
 
 1. Shared interface with conditional behavior
 2. Explicit role-first interface and route boundaries
 
 Option 2 performed better for clarity and maintainability.
 
-## What I Would Improve Next
+## Why Option 2 Won
+
+- Permission logic became easier to reason about in both frontend and backend flows.
+- The API surface stayed explicit instead of accumulating role-condition branches.
+- Recruiter and candidate experiences could evolve independently without rewriting shared views.
+
+## Implementation Notes
+
+- Role-aware route groups were aligned with role-specific task sequences.
+- Request/response contracts were designed to reflect user intent, not only data shape.
+- Information hierarchy was treated as a product decision, not a late UI polish step.
+
+## Next Iteration
 
 - Add stronger analytics for recruiter funnel visibility
 - Introduce richer candidate profile scoring signals

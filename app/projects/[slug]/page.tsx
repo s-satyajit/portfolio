@@ -1,49 +1,59 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { ContextualAIAssistant } from "@/components/ai/contextual-ai-assistant";
 import { Container } from "@/components/layout/container";
 import { PageBackButton } from "@/components/layout/page-back-button";
+import { ProjectCoverMedia } from "@/components/projects/project-cover-media";
 import { ButtonLink } from "@/components/ui/button-link";
 import { SchemaScript } from "@/components/ui/schema-script";
-import { projects } from "@/data/projects";
+import { getProjects } from "@/data/projects";
+import { getProjectContentBySlug, renderMdx } from "@/lib/mdx";
 import { compareProjectsByImpact, getProjectCategoryLabel, getProjectStatusLabel } from "@/lib/project-meta";
 import { buildPageMetadata } from "@/lib/seo";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
+import { Project } from "@/types/project";
 import { cn } from "@/lib/utils";
 
 interface ProjectDetailPageProps {
   params: Promise<{ slug: string }>;
 }
 
-function getStatusBadgeClass(status: (typeof projects)[number]["status"]): string {
+function getStatusBadgeClass(status: Project["status"]): string {
   if (status === "live") return "border-emerald-400/35 bg-emerald-500/10 text-emerald-200";
   if (status === "in-progress") return "border-amber-400/35 bg-amber-500/10 text-amber-200";
   return "border-border bg-surface text-text-secondary";
 }
 
 export async function generateStaticParams() {
+  const projects = getProjects();
   return projects.map((project) => ({ slug: project.slug }));
 }
 
 export async function generateMetadata({ params }: ProjectDetailPageProps) {
+  const projects = getProjects();
   const { slug } = await params;
   const project = projects.find((item) => item.slug === slug);
   if (!project) return {};
+  const coverImage = project.laptopImage || project.images[0];
+
   return buildPageMetadata({
     title: `${project.title} - Project`,
     description: project.summary,
     path: `/projects/${project.slug}`,
-    image: project.images[0],
+    image: coverImage,
     type: "article"
   });
 }
 
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
+  const projects = getProjects();
   const { slug } = await params;
   const project = projects.find((item) => item.slug === slug);
   if (!project) notFound();
+  const projectContent = await getProjectContentBySlug(project.slug);
+  const content = projectContent ? await renderMdx(projectContent.content) : null;
+  const coverImage = project.laptopImage || project.images[0];
 
   const projectIndex = projects.findIndex((item) => item.slug === project.slug);
   const previousProject = projectIndex > 0 ? projects[projectIndex - 1] : null;
@@ -67,7 +77,7 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
             title: project.title,
             description: project.summary,
             publishedTime: "2026-01-01",
-            image: project.images[0],
+            image: coverImage,
             type: "Article"
           }),
           breadcrumbSchema([
@@ -108,15 +118,12 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
           <p className="mt-4 max-w-4xl text-base leading-relaxed text-text-secondary">{project.description}</p>
 
           <div className="mt-8 grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
-            <div className="relative min-h-[320px] overflow-hidden rounded-2xl border border-border bg-surface-card sm:min-h-[420px]">
-              <Image
-                src={project.images[0]}
-                alt={`${project.title} screenshot`}
-                fill
-                sizes="(max-width: 1280px) 100vw, 900px"
-                className="object-cover"
-              />
-            </div>
+            <ProjectCoverMedia
+              project={project}
+              className="min-h-[320px] bg-surface-card sm:min-h-[420px]"
+              sizes="(max-width: 1280px) 100vw, 900px"
+              priority
+            />
 
             <aside className="space-y-4 rounded-2xl border border-border bg-surface-card p-5">
               <div>
@@ -196,6 +203,12 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
               </ul>
             </section>
           </div>
+
+          {content ? (
+            <section className="mt-5 rounded-2xl border border-border bg-surface-card p-6 sm:p-8">
+              <div className="prose prose-invert max-w-none">{content}</div>
+            </section>
+          ) : null}
 
           {project.lessonsLearned.length > 0 ? (
             <section className="mt-5 rounded-2xl border border-border bg-surface-card p-5">

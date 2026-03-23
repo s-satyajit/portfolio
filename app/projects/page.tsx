@@ -3,7 +3,7 @@ import { Container } from "@/components/layout/container";
 import { ProjectsExplorer } from "@/components/projects/projects-explorer";
 import { ButtonLink } from "@/components/ui/button-link";
 import { PageHeader } from "@/components/ui/page-header";
-import { projects } from "@/data/projects";
+import { getProjects } from "@/data/projects";
 import { buildPageMetadata } from "@/lib/seo";
 
 export const metadata = buildPageMetadata({
@@ -14,6 +14,8 @@ export const metadata = buildPageMetadata({
 });
 
 export default function ProjectsPage() {
+  const projects = getProjects();
+
   return (
     <>
       <PageHeader

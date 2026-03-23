@@ -1,0 +1,64 @@
+---
+slug: livetalk-chat-app
+title: LiveTalk - Multi-User Chat App
+summary: Realtime multi-user chat with a polished interface and responsive interactions.
+description: LiveTalk is a communication app that supports multi-user chat experiences with responsive layout and low-latency updates.
+problem: Most starter chat apps are technically functional but weak in practical user flow and real-time reliability.
+solution: Built a chat product with reusable components, message handling patterns, and deployment-ready front-end reliability.
+features:
+  - Realtime multi-user messaging
+  - Responsive chat interface
+  - Session-aware conversational flow
+  - Deployment-ready build
+techStack:
+  - React
+  - Node.js
+  - Socket.io
+  - Tailwind CSS
+architecture:
+  - Event-driven messaging pipeline
+  - Client-side state synchronization for message threads
+  - Reusable chat surface and input modules
+links:
+  github: https://github.com/s-satyajit/multi-user-chatApp
+  live: https://multi-user-chat.vercel.app/
+  caseStudy: /case-studies/
+featured: true
+showOnHomepage: false
+hasCaseStudy: true
+category: full-stack
+status: live
+outcomes:
+  - label: Use Case
+    value: Realtime communication
+  - label: Core Strength
+    value: Event-driven interface behavior
+lessonsLearned:
+  - Realtime apps need explicit state recovery patterns for reliability.
+  - Latency perception can be improved with small UX feedback loops.
+mockupAlt: LiveTalk realtime chat experience on desktop and mobile
+mockupCaption: Realtime messaging interface optimized for cross-device usage.
+mockupMobileSide: right
+order: 2
+draft: false
+---
+
+## Product Context
+
+LiveTalk focuses on realtime communication with a strong emphasis on responsive experience and message flow reliability.
+
+## Engineering Focus
+
+- Event-driven messaging using Socket patterns
+- Stateful UI updates for conversation continuity
+- Chat layout that adapts cleanly across breakpoints
+
+## Build Decisions
+
+I treated latency feedback as a UX problem, not only a networking problem. Small interface responses were added to keep conversations feeling immediate.
+
+## What I Would Improve Next
+
+- Add delivery and read-state instrumentation
+- Improve reconnect and offline recovery handling
+- Expand moderation and room-level controls

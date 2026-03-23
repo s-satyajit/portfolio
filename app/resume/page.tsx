@@ -11,7 +11,7 @@ import { SchemaScript } from "@/components/ui/schema-script";
 import { currentlyBuilding } from "@/data/currently-building";
 import { experienceTimeline } from "@/data/experience";
 import { profile } from "@/data/profile";
-import { projects } from "@/data/projects";
+import { getProjects } from "@/data/projects";
 import {
   resumeAiPrompts,
   resumeEvaluationChecklist,
@@ -43,6 +43,8 @@ const stageLabel: Record<(typeof currentlyBuilding)[number]["stage"], string> = 
 };
 
 export default async function ResumePage() {
+  const projects = getProjects();
+
   const [blogPosts, researchEntries, caseStudies] = await Promise.all([
     getAllBlogPosts(true),
     getAllResearchEntries(true),
@@ -66,6 +68,9 @@ export default async function ResumePage() {
     "He builds practical full-stack products with strong frontend clarity, backend workflow reliability, and applied AI integration.",
     "Best suited for frontend, full-stack, and applied AI product engineering roles with real execution ownership."
   ].join(" ");
+  const resumePreviewUrl = resumePdfPath.includes("#")
+    ? `${resumePdfPath}&zoom=page-width`
+    : `${resumePdfPath}#zoom=page-width`;
 
   return (
     <>
@@ -481,7 +486,7 @@ export default async function ResumePage() {
 
               <div className="mt-4 overflow-hidden rounded-2xl border border-border bg-surface">
                 <iframe
-                  src={resumePdfPath}
+                  src={resumePreviewUrl}
                   title={`${profile.name} Resume`}
                   className="h-[760px] w-full"
                 />

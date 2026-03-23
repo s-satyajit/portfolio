@@ -1,3 +1,5 @@
+import { DeviceMockupFields } from "@/types/device-mockup";
+
 export interface ProjectLinks {
   github?: string;
   live?: string;
@@ -9,7 +11,7 @@ export interface ProjectOutcome {
   value: string;
 }
 
-export interface Project {
+export interface Project extends DeviceMockupFields {
   slug: string;
   title: string;
   summary: string;
@@ -22,9 +24,13 @@ export interface Project {
   images: string[];
   links: ProjectLinks;
   featured: boolean;
+  showOnHomepage: boolean;
   hasCaseStudy: boolean;
   category: "ai" | "full-stack" | "frontend" | "backend" | "tooling";
   status: "live" | "in-progress" | "archived";
   outcomes: ProjectOutcome[];
   lessonsLearned: string[];
+  mockupTitle?: string;
+  order?: number;
+  draft?: boolean;
 }

@@ -1,4 +1,6 @@
-export interface BlogFrontmatter {
+import { DeviceMockupFields } from "@/types/device-mockup";
+
+export interface BlogFrontmatter extends DeviceMockupFields {
   slug: string;
   title: string;
   subtitle?: string;

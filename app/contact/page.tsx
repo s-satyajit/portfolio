@@ -9,7 +9,7 @@ import { ButtonLink } from "@/components/ui/button-link";
 import { PageHeader } from "@/components/ui/page-header";
 import { SchemaScript } from "@/components/ui/schema-script";
 import { profile } from "@/data/profile";
-import { projects } from "@/data/projects";
+import { getProjects } from "@/data/projects";
 import { services } from "@/data/services";
 import { socialLinks } from "@/data/social-links";
 import { buildPageMetadata } from "@/lib/seo";
@@ -64,6 +64,7 @@ const trustedSignals = [
 ];
 
 export default function ContactPage() {
+  const projects = getProjects();
   const linkedIn = socialLinks.find((item) => item.label === "LinkedIn")?.href;
   const featuredProjects = projects.filter((item) => item.featured).slice(0, 2);
   const highlightedServices = services.slice(0, 3);

@@ -21,7 +21,7 @@ const proofLinks = [
   { href: "/services", label: "Services" }
 ];
 
-const footerTechTags = ["Next.js App Router", "TypeScript", "Tailwind CSS", "MDX", "Gemini API"];
+const footerTechTags = Array.from(new Set(["TypeScript", "Next.js", "React", "Node.js", "Tailwind CSS","Zod", "Rehype", "Framer","Vercel", "MDX"]));
 
 export function Footer() {
   const featuredBuilds = currentlyBuilding.slice(0, 2);
@@ -157,7 +157,7 @@ export function Footer() {
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-text-secondary">
-            <p>(c) {new Date().getFullYear()} {profile.name}. Official portfolio presence.</p>
+            <p>(c) {new Date().getFullYear()} {profile.name}</p>
             <div className="flex flex-wrap items-center gap-4">
               <p>Designed for recruiter trust and client clarity.</p>
               <Link href="#top" className="text-accent transition hover:text-cyan-300">

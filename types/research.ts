@@ -1,3 +1,5 @@
+import { DeviceMockupFields } from "@/types/device-mockup";
+
 export type ResearchStatus =
   | "published"
   | "accepted"
@@ -11,7 +13,7 @@ export interface ResearchLinks {
   external?: string;
 }
 
-export interface ResearchFrontmatter {
+export interface ResearchFrontmatter extends DeviceMockupFields {
   slug: string;
   title: string;
   status: ResearchStatus;

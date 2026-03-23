@@ -1,0 +1,66 @@
+---
+slug: hpc-multi-level-cache-optimization
+title: Multi-Level Cache Optimization in HPC Systems
+subtitle: Cache-aware performance engineering across memory hierarchy bottlenecks.
+overview: This case study analyzes memory-hierarchy-aware optimization techniques for HPC workloads, including cache locality strategies and NUMA-sensitive execution planning.
+context: The source report addresses performance limitations created by the memory wall in high-performance computing systems.
+problem: Improve compute performance by reducing memory bottlenecks across L1/L2/L3 hierarchy and system-level memory behavior.
+approach: The analysis reviews cache-aware optimization methods and links them to workload behavior, memory bandwidth pressure, and qualitative performance outcomes.
+analysis: Centered on loop tiling, data layout transformation, prefetching, NUMA-aware placement, and false-sharing reduction as practical optimization levers.
+conclusion: Stable performance gains require architecture-aware optimization strategy rather than isolated micro-optimizations.
+toolsOrMethods:
+  - Cache-aware code optimization patterns
+  - Memory hierarchy performance analysis
+  - NUMA-oriented execution planning
+pdf: /case-studies/Multi_Level_Cache_Optimization_in_HIgh_Performance_Computing_(HPC)_Systems.pdf
+keyInsights:
+  - Memory hierarchy behavior can dominate end-to-end performance outcomes.
+  - Data layout and access-pattern decisions are central to cache effectiveness.
+  - NUMA awareness is important for sustained multi-socket performance.
+learnings:
+  - Profiling and optimization should be iterative, not one-time.
+  - Performance engineering benefits from explicit methodology documentation.
+date: 2026-03-04
+tags:
+  - hpc
+  - performance-engineering
+  - systems
+  - case-study
+draft: false
+---
+
+## Problem Framing
+
+As workloads grow, computation speed can outpace memory access improvements, creating a memory wall. In this setting, compute resources are underutilized unless memory behavior is optimized.
+
+## Analytical Focus
+
+This case study reviews practical techniques used to improve cache efficiency and memory utilization:
+
+- Loop tiling / cache blocking
+- Data layout strategy
+- Prefetching behavior
+- NUMA-aware memory placement
+- False-sharing mitigation
+
+## Methodology Lens
+
+- Start with workload profiling and access-pattern inspection.
+- Apply cache-aware transformations in controlled steps.
+- Evaluate qualitative changes in memory pressure and execution behavior.
+- Consolidate findings into repeatable optimization guidance.
+
+## Key Technical Notes
+
+- Cache optimization is most effective when tied to concrete access-pattern analysis.
+- Isolated tuning without system-level context often gives unstable gains.
+- NUMA and memory-placement decisions are essential for multi-node or multi-socket scenarios.
+
+## Conclusion
+
+The report supports a methodical optimization strategy: profile first, optimize for locality, validate behavior, and document repeatable patterns for future workloads.
+
+## Next Iteration
+
+- Expand benchmark coverage across more workload classes.
+- Introduce stronger quantitative comparison tracking per optimization stage.

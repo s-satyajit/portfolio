@@ -3,7 +3,7 @@
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 import { profile } from "@/data/profile";
 import { socialLinks } from "@/data/social-links";
@@ -40,34 +40,11 @@ function isActiveRoute(pathname: string, item: NavItem): boolean {
 export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
-    const updateScrollProgress = () => {
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (maxScroll <= 0) {
-        setScrollProgress(0);
-        return;
-      }
-
-      const progress = Math.min(100, Math.max(0, (window.scrollY / maxScroll) * 100));
-      setScrollProgress(progress);
-    };
-
-    updateScrollProgress();
-    window.addEventListener("scroll", updateScrollProgress, { passive: true });
-    window.addEventListener("resize", updateScrollProgress);
-
-    return () => {
-      window.removeEventListener("scroll", updateScrollProgress);
-      window.removeEventListener("resize", updateScrollProgress);
-    };
-  }, []);
 
   const mobileSocials = useMemo(() => socialLinks.slice(0, 3), []);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/80 bg-surface/85 backdrop-blur-lg">
+    <header className="sticky top-0 z-50 bg-surface/85 backdrop-blur-lg">
       <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between gap-4 px-4 sm:px-6 lg:px-8">
         <Link href="/" className="group min-w-0">
           <p className="truncate font-heading text-sm font-semibold uppercase tracking-[0.22em]">
@@ -122,10 +99,6 @@ export function Navbar() {
         >
           {open ? <X size={18} /> : <Menu size={18} />}
         </button>
-      </div>
-
-      <div className="h-[2px] w-full bg-transparent">
-        <div className="h-full bg-accent/80 transition-[width] duration-150" style={{ width: `${scrollProgress}%` }} />
       </div>
 
       <div

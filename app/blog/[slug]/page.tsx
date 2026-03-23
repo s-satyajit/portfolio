@@ -9,9 +9,9 @@ import { ArticleShareBar } from "@/components/blog/article-share-bar";
 import { BlogHero } from "@/components/blog/blog-hero";
 import { PrevNextNav } from "@/components/blog/prev-next-nav";
 import { ProjectMentionCard } from "@/components/blog/project-mention-card";
-import { ReadingProgress } from "@/components/blog/reading-progress";
 import { TableOfContents } from "@/components/blog/table-of-contents";
 import { Container } from "@/components/layout/container";
+import { DeviceMockupShowcase } from "@/components/mdx/device-mockup-showcase";
 import { SchemaScript } from "@/components/ui/schema-script";
 import { authorProfile } from "@/data/author";
 import { articleSchema, breadcrumbSchema } from "@/lib/schema";
@@ -99,7 +99,6 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
 
   return (
     <>
-      <ReadingProgress />
       <SchemaScript
         schema={[
           articleSchema({
@@ -151,6 +150,16 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
                 </>
               }
             />
+
+            {post.laptopImage && post.mobileImage ? (
+              <DeviceMockupShowcase
+                laptopImage={post.laptopImage}
+                mobileImage={post.mobileImage}
+                alt={post.mockupAlt || post.title}
+                caption={post.mockupCaption}
+                mobileSide={post.mockupMobileSide}
+              />
+            ) : null}
 
             <section className="rounded-2xl border border-border bg-surface-card p-5">
               <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">Article Positioning</p>

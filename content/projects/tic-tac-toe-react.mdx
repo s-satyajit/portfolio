@@ -1,0 +1,56 @@
+---
+slug: tic-tac-toe-react
+title: Tic Tac Toe
+summary: A polished game implementation with undo/redo state management.
+description: A React + Tailwind implementation of Tic Tac Toe focused on clean state transitions and interaction quality.
+problem: Simple apps are useful for testing and demonstrating predictable state behavior.
+solution: Implemented game history, reset flow, and undo/redo actions using deterministic state updates.
+features:
+  - Undo/redo
+  - Game reset
+  - Responsive gameplay interface
+techStack:
+  - React
+  - Tailwind CSS
+architecture:
+  - State history stack
+  - UI-state synchronization
+links:
+  github: https://github.com/s-satyajit/TicTacToe-Reactjs
+  live: https://tic-tac-toe-reactjs-gamma.vercel.app/
+featured: false
+showOnHomepage: false
+hasCaseStudy: false
+category: frontend
+status: live
+outcomes:
+  - label: Use Case
+    value: State-pattern demonstration
+lessonsLearned:
+  - Predictable state history improves both debugging and UX iteration.
+mockupAlt: Tic Tac Toe state-driven gameplay UI on desktop and mobile
+mockupCaption: Small product, strong state-management clarity across device surfaces.
+mockupMobileSide: right
+order: 6
+draft: false
+---
+
+## Product Context
+
+This project is a compact state-management exercise focused on predictable gameplay behavior and interaction quality.
+
+## Engineering Focus
+
+- Deterministic game state transitions
+- History stack for undo and redo
+- Responsive interaction surface
+
+## Build Decisions
+
+I treated it as a reliability exercise: every move updates history cleanly, and reset/recovery flows stay explicit.
+
+## What I Would Improve Next
+
+- Add multiplayer turn sync
+- Track move analytics and replay flow
+- Expand game-board customization options

@@ -1,0 +1,87 @@
+---
+slug: payflow
+title: PayFlow - Full-Stack Payment Application
+summary: "MERN payment workflow app with JWT auth, account management, fund transfers, account search, and transaction history."
+description: "PayFlow is a full-stack MERN application built for practical digital payment workflows: user auth, account linking, secure transfer operations, searchable account discovery, and transaction tracking through a user dashboard."
+problem: "Payment-style workflows often split auth, account data, and transfer operations across disconnected screens and weak API boundaries, making trust and usability difficult."
+solution: "Built a role-consistent product flow with protected APIs, JWT-based auth sessions, account lifecycle handling, transfer operations, and history visibility in a single dashboard-driven experience."
+features:
+  - JWT-based sign up/sign in flow
+  - Create and manage multiple bank accounts
+  - Account search by account number, IFSC, or user name
+  - Transfer funds between accounts with protected transaction routes
+  - Transaction history view with activity traceability
+  - Dashboard with profile, balances, and recent activity
+techStack:
+  - React (Vite)
+  - Node.js
+  - Express
+  - MongoDB Atlas
+  - JWT
+  - REST API
+architecture:
+  - Client-server split with React frontend and Express backend
+  - JWT-protected API routes for non-auth operations
+  - Account and transaction modules with request validation and secure flow boundaries
+  - Dashboard aggregation pattern for profile, balances, and recent activity
+links:
+  github: https://github.com/s-satyajit/payflow
+  live: https://payflow-zeta.vercel.app/
+featured: true
+showOnHomepage: true
+hasCaseStudy: false
+category: full-stack
+status: live
+outcomes:
+  - label: Use Case
+    value: Payment workflow simulation
+  - label: Core Strength
+    value: Auth + transactional API flow integration
+lessonsLearned:
+  - Protected API boundaries are as important as UI clarity in payment-style products.
+  - Transaction flows need explicit validation and failure-safe messaging to preserve user trust.
+order: 0
+draft: false
+---
+
+## Product Context
+
+PayFlow is built as a practical full-stack payment workflow product where users can sign in, create accounts, move funds, and track activity from one dashboard.  
+The focus is not only UI flow, but reliable backend boundaries for account and transaction operations.
+
+## What I Built
+
+- JWT-based sign-up and sign-in flow with protected access for non-auth APIs.
+- Account management actions for creating and handling multiple bank accounts.
+- Search flow for account lookup by account number, IFSC, or user name.
+- Transaction flow for transferring funds and reviewing transaction history.
+- Dashboard layer for profile details, balances, and recent activity.
+
+## API and Security Design
+
+The API layer is organized around auth, account, transaction, and user modules.  
+Auth is token-based (JWT), and operational routes are protected through authorization checks so account and transfer actions are not exposed publicly.  
+The API design keeps each workflow scoped and explicit, which makes frontend integration and debugging easier.
+
+## Transaction Workflow
+
+Fund transfer logic is wired through protected transaction endpoints with clear request payload structure.  
+The flow links sender context, receiver account details, amount input, and transaction records so users can see both action results and history continuity in the dashboard.
+
+## Why This Project Matters
+
+PayFlow is strong portfolio evidence for full-stack execution because it combines:
+
+- authentication and protected route handling,
+- account lifecycle logic,
+- transactional API operations,
+- search-first data retrieval,
+- and dashboard-oriented product presentation.
+
+It demonstrates practical system composition beyond static CRUD pages.
+
+## What I Would Improve Next
+
+- Add idempotency and transfer-safety guardrails for repeated submit prevention.
+- Introduce stronger server-side validation and standardized error contracts for each financial action.
+- Expand observability around transaction states to improve support and debugging workflows.

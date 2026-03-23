@@ -129,6 +129,20 @@ export const recruiterQuickFacts: RecruiterFact[] = [
 
 export const recruiterProofItems: RecruiterProofItem[] = [
   {
+    id: "proof-payflow-transactions",
+    label: "Best proof for protected APIs and transaction workflows",
+    projectName: "PayFlow - Full-Stack Payment Application",
+    projectSlug: "payflow",
+    summary:
+      "A MERN payment workflow app with JWT auth, account handling, fund transfer operations, and transaction history.",
+    whatIBuilt:
+      "Implemented auth flow, protected API boundaries, account lifecycle actions, transfer flow endpoints, and dashboard-linked activity visibility.",
+    whyItMatters:
+      "Shows practical full-stack ownership of security-sensitive product workflows where auth, data integrity, and operation clarity all matter.",
+    ctaLabel: "Open project",
+    aiPrompt: "How does PayFlow demonstrate his capability in JWT auth, protected APIs, and transaction workflow implementation?"
+  },
+  {
     id: "proof-auth-roles",
     label: "Best proof for auth and role workflows",
     projectName: "Hirrd - Job Portal Platform",

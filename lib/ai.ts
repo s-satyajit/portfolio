@@ -3,7 +3,7 @@ import { contactProcessSteps, contactResponseCommitments } from "@/data/contact"
 import { currentlyBuilding } from "@/data/currently-building";
 import { experienceTimeline } from "@/data/experience";
 import { profile } from "@/data/profile";
-import { projects } from "@/data/projects";
+import { getProjects } from "@/data/projects";
 import {
   recruiterFaq,
   recruiterLikelyContributions,
@@ -194,8 +194,10 @@ async function loadContentSignals() {
 async function buildGroundingBundle(
   mode: AIContextMode,
   projectSlug?: string,
-  entrySlug?: string
+  entrySlug?: string,
+  projectsData: ReturnType<typeof getProjects> = getProjects()
 ): Promise<GroundingBundle> {
+  const projects = projectsData;
   const sources = sourcesByMode(mode, projectSlug);
 
   const sharedProfile = {
@@ -211,10 +213,7 @@ async function buildGroundingBundle(
     aboutIntro: profile.aboutIntro,
     focusNow: profile.focusNow,
     journey: profile.journey,
-    buildingMindset: profile.buildingMindset,
-    buildCategories: profile.buildCategories,
     stackByCategory: profile.stackByCategory,
-    workPrinciples: profile.workPrinciples,
     personalNote: profile.personalNote,
     opportunityTargets: profile.opportunityTargets
   };
@@ -348,13 +347,19 @@ async function buildGroundingBundle(
           ? {
               slug: entry.slug,
               title: entry.title,
+              subtitle: entry.subtitle,
+              overview: entry.overview,
               context: entry.context,
               problem: entry.problem,
+              approach: entry.approach,
               analysis: entry.analysis,
               conclusion: entry.conclusion,
+              toolsOrMethods: entry.toolsOrMethods,
               keyInsights: entry.keyInsights,
               learnings: entry.learnings,
-              tags: entry.tags
+              tags: entry.tags,
+              pdf: entry.pdf,
+              pdfReferences: entry.pdfReferences
             }
           : null,
         relatedProjects: projects
@@ -699,7 +704,13 @@ function unavailableWithDirection(mode: AIContextMode): string {
   return "I don't see that information here. I can answer from portfolio profile, projects, and current focus.";
 }
 
-function fallbackAnswer(query: string, bundle: GroundingBundle, persona: AIPersona): AIResponseBody {
+function fallbackAnswer(
+  query: string,
+  bundle: GroundingBundle,
+  persona: AIPersona,
+  projectsData: ReturnType<typeof getProjects>
+): AIResponseBody {
+  const projects = projectsData;
   const lower = query.toLowerCase();
   const confidence = inferConfidence(query);
 
@@ -1124,13 +1135,14 @@ export async function generatePortfolioAnswer(
 ): Promise<AIResponseBody> {
   const persona = options.persona || "general";
   const mode = resolveMode(options.mode);
-  const bundle = await buildGroundingBundle(mode, options.projectSlug, options.entrySlug);
+  const projects = getProjects();
+  const bundle = await buildGroundingBundle(mode, options.projectSlug, options.entrySlug, projects);
 
   const apiKey = process.env.GEMINI_API_KEY;
   const model = process.env.GEMINI_MODEL || "gemini-2.0-flash";
 
   if (!apiKey) {
-    return fallbackAnswer(query, bundle, persona);
+    return fallbackAnswer(query, bundle, persona, projects);
   }
 
   const systemPrompt = [
@@ -1179,7 +1191,7 @@ Answer requirements:
     );
 
     if (!response.ok) {
-      return fallbackAnswer(query, bundle, persona);
+      return fallbackAnswer(query, bundle, persona, projects);
     }
 
     const data = (await response.json()) as {
@@ -1195,7 +1207,7 @@ Answer requirements:
         .trim() || "";
 
     if (!answer) {
-      return fallbackAnswer(query, bundle, persona);
+      return fallbackAnswer(query, bundle, persona, projects);
     }
 
     return {
@@ -1204,6 +1216,6 @@ Answer requirements:
       confidence: inferConfidence(query)
     };
   } catch {
-    return fallbackAnswer(query, bundle, persona);
+    return fallbackAnswer(query, bundle, persona, projects);
   }
 }

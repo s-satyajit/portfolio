@@ -1,6 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 
+import { ProjectCoverMedia } from "@/components/projects/project-cover-media";
 import { Project } from "@/types/project";
 
 interface ProjectGridProps {
@@ -15,15 +15,12 @@ export function ProjectGrid({ projects }: ProjectGridProps) {
           key={project.slug}
           className="group rounded-2xl border border-border bg-surface-card p-4 transition hover:border-accent/35"
         >
-          <div className="relative h-44 overflow-hidden rounded-xl border border-border">
-            <Image
-              src={project.images[0]}
-              alt={`${project.title} screenshot`}
-              fill
-              sizes="(max-width: 1024px) 100vw, 33vw"
-              className="object-cover transition duration-300 group-hover:scale-105"
-            />
-          </div>
+          <ProjectCoverMedia
+            project={project}
+            className="h-44 rounded-xl"
+            sizes="(max-width: 1024px) 100vw, 33vw"
+            imageClassName="transition duration-300 group-hover:scale-105"
+          />
           <div className="mt-4">
             <h3 className="font-heading text-lg">
               <Link href={`/projects/${project.slug}`} className="hover:text-accent">

@@ -2,7 +2,7 @@ import { SeoConfig } from "@/types/seo";
 
 export const seoConfig: SeoConfig = {
   siteName: "Satyajit Samal",
-  siteUrl: process.env.SITE_URL || "https://www.satyajitsamal.dev",
+  siteUrl: process.env.SITE_URL || "https://www.satyajitsamal.vercel.app",
   defaultTitle: "Satyajit Samal - AI Engineer + Full-Stack Developer",
   titleTemplate: "%s | Satyajit Samal",
   defaultDescription:

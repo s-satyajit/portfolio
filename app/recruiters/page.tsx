@@ -5,7 +5,7 @@ import { Container } from "@/components/layout/container";
 import { ButtonLink } from "@/components/ui/button-link";
 import { PageHeader } from "@/components/ui/page-header";
 import { profile } from "@/data/profile";
-import { projects } from "@/data/projects";
+import { getProjects } from "@/data/projects";
 import {
   recruiterActions,
   recruiterAiSuggestedPrompts,
@@ -28,6 +28,8 @@ export const metadata = buildPageMetadata({
 });
 
 export default function RecruitersPage() {
+  const projects = getProjects();
+
   return (
     <>
       <PageHeader

@@ -1,0 +1,59 @@
+---
+slug: inventory-dashboard
+title: Inventory Dashboard
+summary: An analytics-style dashboard for interpreting inventory sheet data with clarity.
+description: The dashboard translates spreadsheet inventory data into visual reporting for fast operational understanding.
+problem: Raw spreadsheet data makes pattern detection and reporting slow for decision-making.
+solution: Created a UI that surfaces summary metrics, trend visuals, and detailed tables from spreadsheet-driven data.
+features:
+  - Interactive chart views
+  - Data tables and report layout
+  - Excel-sheet driven analysis
+  - Dashboard summary strip
+techStack:
+  - React
+  - JavaScript
+  - Charting Libraries
+architecture:
+  - Data ingestion from sheet source
+  - Visualization layer for trends
+  - Metric cards for operational snapshots
+links:
+  github: https://github.com/s-satyajit/inventory-dashboard
+  live: https://inventory-dashboard-bice.vercel.app/
+featured: false
+showOnHomepage: false
+hasCaseStudy: false
+category: frontend
+status: live
+outcomes:
+  - label: Use Case
+    value: Inventory analytics reporting
+lessonsLearned:
+  - Operational dashboards should prioritize scannable summaries over dense visuals.
+mockupAlt: Inventory analytics dashboard on desktop and mobile views
+mockupCaption: Spreadsheet-to-dashboard workflow with metric-first inventory visibility.
+mockupMobileSide: right
+order: 5
+draft: false
+---
+
+## Product Context
+
+Inventory Dashboard translates sheet-driven data into visual summaries so teams can scan stock behavior and trends quickly.
+
+## Engineering Focus
+
+- Data transformation from spreadsheet-style inputs
+- Metric cards and chart-driven snapshots
+- Table views for deeper inventory inspection
+
+## Build Decisions
+
+I focused on information hierarchy first: summary metrics for quick decision signals, then detailed tables for operational follow-up.
+
+## What I Would Improve Next
+
+- Add anomaly detection cues for inventory risk
+- Improve time-range comparisons for trend analysis
+- Add CSV import validation diagnostics

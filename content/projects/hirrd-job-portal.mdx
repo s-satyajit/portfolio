@@ -1,0 +1,65 @@
+---
+slug: hirrd-job-portal
+title: Hirrd - Job Portal Platform
+summary: A recruiter and candidate workflow platform with secure auth and real-time job discovery.
+description: Hirrd is a full-stack hiring platform focused on practical recruiter and candidate workflows, from listings to application flow.
+problem: Job seekers and recruiters need a clean, low-friction workflow to publish roles and process applications without chaotic interfaces.
+solution: Built a role-driven product experience with authentication, listing management, and job application flow designed around clarity.
+features:
+  - Role-based user flows for recruiters and candidates
+  - Secure authentication and protected routes
+  - Application and listing management UX
+  - Production-style deployment on Vercel
+techStack:
+  - React
+  - Node.js
+  - Express
+  - MongoDB
+  - Tailwind CSS
+architecture:
+  - Client and API separation for maintainability
+  - Auth middleware for role-level protection
+  - Stateful form flow for job posting and application processing
+links:
+  github: https://github.com/s-satyajit/hirrd-jobPortal
+  live: https://job-portal-eight-delta.vercel.app/
+  caseStudy: /case-studies/hirrd-product-architecture
+featured: true
+showOnHomepage: false
+hasCaseStudy: true
+category: full-stack
+status: live
+outcomes:
+  - label: Use Case
+    value: Recruitment workflow
+  - label: Core Strength
+    value: Auth + product UX alignment
+lessonsLearned:
+  - Clear user-role boundaries reduce UI and API complexity.
+  - Recruiter-focused UX decisions require strong information hierarchy.
+mockupAlt: Hirrd job portal recruiter and candidate workflow screens
+mockupCaption: Product surface preview across desktop and mobile hiring flows.
+mockupMobileSide: right
+order: 1
+draft: false
+---
+
+## Product Context
+
+Hirrd was built as a role-based hiring workflow where recruiters and candidates operate with different goals but share a consistent product language.
+
+## Engineering Focus
+
+- Role-first navigation and route protection
+- Clean application flow from job discovery to submission
+- Form and listing UX designed for practical use
+
+## Build Decisions
+
+I prioritized clarity in routing and data boundaries so role-specific actions stay predictable. That decision improved both user experience and backend contract readability.
+
+## What I Would Improve Next
+
+- Add pipeline analytics for recruiter funnel drop-off
+- Introduce better candidate profile ranking signals
+- Expand workflow notifications for status changes

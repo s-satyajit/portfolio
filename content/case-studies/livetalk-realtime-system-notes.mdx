@@ -1,10 +1,17 @@
 ---
 slug: livetalk-realtime-system-notes
 title: LiveTalk - Realtime System Notes
+subtitle: Stabilizing real-time chat behavior with event and reconciliation patterns.
+overview: This case study captures the system choices used to keep message flow reliable under network variability in a multi-user chat product.
 context: A multi-user chat product prototype focused on responsiveness and reliability.
 problem: Keep realtime interactions stable without overwhelming front-end state complexity.
+approach: I evaluated event-only state mutation against event-plus-local-reconciliation and chose the latter to reduce message drift and ordering issues.
 analysis: Evaluated push-only event handling versus event + local reconciliation to prevent message drift.
 conclusion: Event plus reconciliation produced better perceived reliability.
+toolsOrMethods:
+  - Event-driven state flow
+  - Local reconciliation snapshots
+  - Latency feedback UX patterns
 keyInsights:
   - Realtime UX quality depends on fast feedback loops.
   - Defensive state handling matters even in small chat products.
@@ -19,6 +26,10 @@ tags:
 draft: false
 ---
 
+## Overview
+
+LiveTalk was treated as a product reliability exercise, not only a socket transport implementation. The goal was to keep users confident that message state is consistent even when connection quality changes.
+
 ## System Focus
 
 The key architecture question was how to preserve message order and trust during network variability.
@@ -29,6 +40,18 @@ The key architecture question was how to preserve message order and trust during
 - Keep local state snapshots for reconciliation
 - Surface status feedback in the UI instead of silent waiting
 
+## Why This Approach Worked
+
+- Reconciliation reduced edge-case drift when events arrived late or out of order.
+- UI status cues lowered perceived uncertainty during delivery waits.
+- Message thread continuity improved without adding unnecessary complexity to core flow.
+
 ## Key Takeaway
 
 Realtime systems are product systems. Reliability perception is as important as raw transport speed.
+
+## Next Iteration
+
+- Add explicit delivery and read-state diagnostics for debugging.
+- Improve reconnect recovery after network interruptions.
+- Introduce conversation-level instrumentation for performance profiling.

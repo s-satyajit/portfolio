@@ -6,6 +6,11 @@ const configDirectory = path.dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
   images: {
+    localPatterns: [
+      {
+        pathname: "/images/**"
+      }
+    ],
     remotePatterns: [
       {
         protocol: "https",

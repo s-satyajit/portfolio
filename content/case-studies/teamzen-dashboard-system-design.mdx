@@ -1,11 +1,17 @@
 ---
 slug: teamzen-dashboard-system-design
 title: TeamZen - Dashboard System Design
+subtitle: Designing an operations dashboard for fast scanning and actionability.
+overview: This case study explains how I structured TeamZen dashboard information flow to reduce cognitive load while preserving operational depth.
 context: An employee management dashboard aimed at practical internal operations.
 problem: Present operational data with enough depth for action but without cognitive overload.
+approach: I compared dense table-first screens with a layered summary-to-detail model and prioritized a progressive information hierarchy.
 analysis: Compared dense-data table-first design versus layered summary-to-detail flow.
 conclusion: Layered summary-to-detail improved scanability and action speed.
-pdf: /case-studies/Satyajit_Samal_ADSA_Case_Study_1.pdf
+toolsOrMethods:
+  - Dashboard information hierarchy mapping
+  - Progressive disclosure design
+  - Task-priority workflow analysis
 keyInsights:
   - Dashboard success starts with question prioritization.
   - Summary strips are strongest when tied to next actions.
@@ -20,6 +26,10 @@ tags:
 draft: false
 ---
 
+## Overview
+
+TeamZen focused on an internal operations use case where users need to move quickly between status checking, record review, and next action. The main challenge was balancing visibility and cognitive load.
+
 ## Problem Framing
 
 Operations dashboards often fail by being comprehensive but not usable.
@@ -31,6 +41,12 @@ I prioritized:
 - High-signal summary metrics first
 - Contextual detail only when needed
 - Stable layout zones to reduce cognitive switching
+
+## Practical Outcome
+
+- Teams can scan top-level status before entering detailed tables.
+- Repetitive navigation drops when section zones stay consistent.
+- Action pathways become clearer when summaries map directly to follow-up views.
 
 ## Next Iteration
 

@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { LayoutGrid, List, Search, SlidersHorizontal, Sparkles } from "lucide-react";
 import { useMemo, useState } from "react";
 
+import { ProjectCoverMedia } from "@/components/projects/project-cover-media";
 import { Project } from "@/types/project";
 import { compareProjectsByImpact, getProjectCategoryLabel, getProjectStatusLabel } from "@/lib/project-meta";
 import { cn } from "@/lib/utils";
@@ -89,13 +89,12 @@ function buildMetrics(projects: Project[]): ProjectMetric[] {
 function SpotlightCard({ project }: { project: Project }) {
   return (
     <article className="group grid gap-5 rounded-3xl border border-border bg-surface-card p-4 sm:p-5 lg:grid-cols-[1.1fr_1fr]">
-      <div className="relative min-h-[250px] overflow-hidden rounded-2xl border border-border bg-surface">
-        <Image
-          src={project.images[0]}
-          alt={`${project.title} screenshot`}
-          fill
+      <div className="relative min-h-[250px]">
+        <ProjectCoverMedia
+          project={project}
+          className="h-full min-h-[250px]"
           sizes="(max-width: 1024px) 100vw, 48vw"
-          className="object-cover transition duration-500 group-hover:scale-[1.03]"
+          imageClassName="transition duration-500 group-hover:scale-[1.03]"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface/70 via-transparent to-transparent" />
       </div>
@@ -192,15 +191,12 @@ function SpotlightCard({ project }: { project: Project }) {
 function CompactCard({ project }: { project: Project }) {
   return (
     <article className="group rounded-2xl border border-border bg-surface-card p-4 transition hover:border-accent/35">
-      <div className="relative h-44 overflow-hidden rounded-xl border border-border">
-        <Image
-          src={project.images[0]}
-          alt={`${project.title} screenshot`}
-          fill
-          sizes="(max-width: 1024px) 100vw, 33vw"
-          className="object-cover transition duration-300 group-hover:scale-105"
-        />
-      </div>
+      <ProjectCoverMedia
+        project={project}
+        className="h-44 rounded-xl"
+        sizes="(max-width: 1024px) 100vw, 33vw"
+        imageClassName="transition duration-300 group-hover:scale-105"
+      />
       <div className="mt-4">
         <div className="flex flex-wrap items-center gap-2">
           <span className="rounded-full border border-border bg-surface px-2 py-0.5 text-[11px] text-text-secondary">

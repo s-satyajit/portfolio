@@ -17,7 +17,7 @@ export function ContactCtaSection() {
           <div className="max-w-2xl space-y-3">
             <p className="inline-flex items-center gap-1.5 rounded-full border border-accent/35 bg-accent-soft px-3 py-1 text-xs text-accent">
               <UserRoundSearch size={13} />
-              Open to internship, freelance, and full-time opportunities
+              Open to freelance, and full-time opportunities
             </p>
             <p className="text-sm leading-relaxed text-text-secondary">
               Best fit for AI-integrated product engineering, full-stack implementation, dashboard workflows, and grounded assistant features.

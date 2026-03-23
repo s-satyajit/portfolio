@@ -70,6 +70,11 @@ function InsightCard({ item, compact = false }: InsightCardProps) {
         <span className="rounded-full border border-accent/30 bg-accent-soft px-2.5 py-1 text-[11px] uppercase tracking-[0.16em] text-accent">
           {kindLabel(item.kind)}
         </span>
+        {item.kind === "research" && item.pdf ? (
+          <span className="rounded-full border border-border px-2.5 py-1 text-[11px] uppercase tracking-[0.16em] text-text-secondary">
+            PDF Source
+          </span>
+        ) : null}
         {item.kind === "research" && item.status ? (
           <span
             className={cn(
@@ -87,9 +92,10 @@ function InsightCard({ item, compact = false }: InsightCardProps) {
           {item.title}
         </Link>
       </h3>
+      {item.subtitle ? <p className="mt-1 text-sm text-text-secondary">{item.subtitle}</p> : null}
 
       <p className={cn("mt-2 text-text-secondary", compact ? "text-sm" : "text-sm leading-relaxed")}>
-        {item.kind === "research" ? item.summary : item.context || item.summary}
+        {item.kind === "research" ? item.summary : item.overview || item.context || item.summary}
       </p>
 
       {item.kind === "research" ? (
@@ -100,12 +106,18 @@ function InsightCard({ item, compact = false }: InsightCardProps) {
       ) : (
         <div className="mt-3 grid gap-3 sm:grid-cols-2">
           <div className="rounded-xl border border-border bg-surface p-3">
-            <p className="text-xs uppercase tracking-[0.16em] text-accent">Problem</p>
-            <p className="mt-1 text-sm text-text-secondary">{item.problem}</p>
+            <p className="text-xs uppercase tracking-[0.16em] text-accent">Theme</p>
+            <p className="mt-1 text-sm text-text-secondary">
+              {item.focusArea || item.tags.slice(0, 2).join(" | ") || "Applied system analysis"}
+            </p>
           </div>
           <div className="rounded-xl border border-border bg-surface p-3">
-            <p className="text-xs uppercase tracking-[0.16em] text-accent">Conclusion</p>
-            <p className="mt-1 text-sm text-text-secondary">{item.conclusion}</p>
+            <p className="text-xs uppercase tracking-[0.16em] text-accent">Insight Signal</p>
+            <p className="mt-1 text-sm text-text-secondary">
+              {item.keyInsights?.length
+                ? `${item.keyInsights.length} key insight${item.keyInsights.length > 1 ? "s" : ""}`
+                : item.conclusion}
+            </p>
           </div>
         </div>
       )}
@@ -129,7 +141,7 @@ function InsightCard({ item, compact = false }: InsightCardProps) {
         >
           Open {item.kind === "research" ? "Research" : "Case Study"}
         </Link>
-        {item.pdf ? (
+        {item.kind === "research" && item.pdf ? (
           <a
             href={item.pdf}
             target="_blank"

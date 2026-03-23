@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import { ScrollSyncedSidebar } from "@/components/about/scroll-synced-sidebar";
 import { ContextualAIAssistant } from "@/components/ai/contextual-ai-assistant";
@@ -11,7 +10,6 @@ import { Reveal } from "@/components/ui/reveal";
 import { SchemaScript } from "@/components/ui/schema-script";
 import { currentlyBuilding } from "@/data/currently-building";
 import { profile } from "@/data/profile";
-import { projects } from "@/data/projects";
 import { socialLinks } from "@/data/social-links";
 import { buildPageMetadata } from "@/lib/seo";
 import { profilePageSchema } from "@/lib/schema";
@@ -27,11 +25,8 @@ const navSections = [
   { id: "about-intro", label: "Introduction" },
   { id: "focus-now", label: "Focus now" },
   { id: "journey", label: "Journey" },
-  { id: "mindset", label: "How I build" },
-  { id: "build-categories", label: "What I build" },
   { id: "current-stack", label: "Current stack" },
   { id: "currently-building", label: "Currently building" },
-  { id: "principles", label: "Work principles" },
   { id: "ask-about-me", label: "Ask about me" },
   { id: "next-step", label: "Next steps" }
 ];
@@ -58,8 +53,6 @@ export default function AboutPage() {
   const linkedInLink =
     socialLinks.find((item) => item.label === "LinkedIn")?.href ||
     "https://www.linkedin.com/in/satyajitsamal/";
-
-  const highlightedProjects = projects.filter((item) => item.featured).slice(0, 3);
 
   return (
     <>
@@ -332,45 +325,6 @@ export default function AboutPage() {
             </Reveal>
 
             <Reveal delay={0.08}>
-              <section id="mindset" className="rounded-2xl border border-border bg-surface-card p-5 sm:p-6">
-                <h2 className="font-heading text-2xl">How I think about building</h2>
-                <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                  {profile.buildingMindset.map((item) => (
-                    <article key={item} className="rounded-xl border border-border bg-surface p-4">
-                      <p className="text-sm leading-relaxed text-text-secondary">{item}</p>
-                    </article>
-                  ))}
-                </div>
-              </section>
-            </Reveal>
-
-            <Reveal delay={0.1}>
-              <section id="build-categories" className="rounded-2xl border border-border bg-surface-card p-5 sm:p-6">
-                <h2 className="font-heading text-2xl">What I build</h2>
-                <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                  {profile.buildCategories.map((item) => (
-                    <article key={item.title} className="rounded-xl border border-border bg-surface p-4">
-                      <h3 className="font-heading text-lg">{item.title}</h3>
-                      <p className="mt-2 text-sm text-text-secondary">{item.summary}</p>
-                      {item.examples?.length ? (
-                        <div className="mt-3 flex flex-wrap gap-2">
-                          {item.examples.map((example) => (
-                            <span
-                              key={example}
-                              className="rounded-full border border-border px-2.5 py-1 text-xs text-text-secondary"
-                            >
-                              {example}
-                            </span>
-                          ))}
-                        </div>
-                      ) : null}
-                    </article>
-                  ))}
-                </div>
-              </section>
-            </Reveal>
-
-            <Reveal delay={0.12}>
               <section id="current-stack" className="rounded-2xl border border-border bg-surface-card p-5 sm:p-6">
                 <h2 className="font-heading text-2xl">Current stack</h2>
                 <div className="mt-4 grid gap-3 sm:grid-cols-2">
@@ -379,14 +333,14 @@ export default function AboutPage() {
                       <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
                         {group.title}
                       </p>
-                      <p className="mt-2 text-sm text-text-secondary">{group.items.join(" | ")}</p>
+                      <p className="mt-2 text-sm text-text-secondary">{group.items.join(", ")}</p>
                     </article>
                   ))}
                 </div>
               </section>
             </Reveal>
 
-            <Reveal delay={0.14}>
+            <Reveal delay={0.1}>
               <section id="currently-building" className="rounded-2xl border border-border bg-surface-card p-5 sm:p-6">
                 <h2 className="font-heading text-2xl">Currently building</h2>
                 <p className="mt-2 text-sm text-text-secondary">
@@ -418,40 +372,7 @@ export default function AboutPage() {
               </section>
             </Reveal>
 
-            <Reveal delay={0.16}>
-              <section className="rounded-2xl border border-border bg-surface-card p-5 sm:p-6">
-                <h2 className="font-heading text-2xl">Projects that reflect this direction</h2>
-                <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                  {highlightedProjects.map((project) => (
-                    <article key={project.slug} className="rounded-xl border border-border bg-surface p-4">
-                      <h3 className="font-heading text-base">{project.title}</h3>
-                      <p className="mt-2 text-sm text-text-secondary">{project.summary}</p>
-                      <Link
-                        href={`/projects/${project.slug}`}
-                        className="mt-3 inline-flex text-sm text-accent transition hover:text-cyan-300"
-                      >
-                        View project
-                      </Link>
-                    </article>
-                  ))}
-                </div>
-              </section>
-            </Reveal>
-
-            <Reveal delay={0.18}>
-              <section id="principles" className="rounded-2xl border border-border bg-surface-card p-5 sm:p-6">
-                <h2 className="font-heading text-2xl">Work principles</h2>
-                <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                  {profile.workPrinciples.map((principle) => (
-                    <article key={principle} className="rounded-xl border border-border bg-surface p-4">
-                      <p className="text-sm leading-relaxed text-text-secondary">{principle}</p>
-                    </article>
-                  ))}
-                </div>
-              </section>
-            </Reveal>
-
-            <Reveal delay={0.2}>
+            <Reveal delay={0.12}>
               <section className="rounded-2xl border border-border bg-surface-card p-5 sm:p-6">
                 <h2 className="font-heading text-2xl">{profile.personalNote.heading}</h2>
                 <div className="mt-3 space-y-3 text-sm leading-relaxed text-text-secondary">
@@ -462,7 +383,7 @@ export default function AboutPage() {
               </section>
             </Reveal>
 
-            <Reveal delay={0.22}>
+            <Reveal delay={0.14}>
               <section className="rounded-2xl border border-border bg-surface-card p-5 sm:p-6">
                 <h2 className="font-heading text-2xl">Opportunities I am looking for</h2>
                 <ul className="mt-3 space-y-2 text-sm text-text-secondary">
@@ -473,7 +394,7 @@ export default function AboutPage() {
               </section>
             </Reveal>
 
-            <Reveal delay={0.24}>
+            <Reveal delay={0.16}>
               <section id="ask-about-me">
                 <ContextualAIAssistant
                   mode="about"
@@ -484,7 +405,7 @@ export default function AboutPage() {
               </section>
             </Reveal>
 
-            <Reveal delay={0.26}>
+            <Reveal delay={0.18}>
               <section>
                 <h2 className="font-heading text-2xl">Active coding consistency</h2>
                 <p className="mt-2 text-sm text-text-secondary">
@@ -496,7 +417,7 @@ export default function AboutPage() {
               </section>
             </Reveal>
 
-            <Reveal delay={0.28}>
+            <Reveal delay={0.2}>
               <section id="next-step" className="rounded-2xl border border-border bg-surface-card p-5 sm:p-6">
                 <h2 className="font-heading text-2xl">Next steps</h2>
                 <p className="mt-2 text-sm text-text-secondary">
