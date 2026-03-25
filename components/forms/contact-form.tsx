@@ -19,6 +19,7 @@ import {
 const MESSAGE_MIN = 30;
 const MESSAGE_MAX = 2000;
 const STORAGE_KEY = "contact-form-draft-v2";
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 interface FormState {
   name: string;
@@ -52,9 +53,59 @@ const initialState: FormState = {
   fax: ""
 };
 
+function buildMessageDraft(state: FormState): string {
+  const greeting = "Hi Satyajit,";
+  const introByCategory: Record<ContactCategory, string> = {
+    "job-opportunity":
+      "I am reaching out regarding a full-time opportunity and would like to discuss role fit.",
+    "freelance-project":
+      "I am reaching out with a freelance project and would like to discuss scope and execution.",
+    collaboration:
+      "I am reaching out for a technical collaboration and would like to explore a practical working plan.",
+    "general-message": "I am reaching out to discuss a relevant opportunity and next steps."
+  };
+
+  const details: string[] = [];
+  if (state.organization.trim()) {
+    details.push(`Organization: ${state.organization.trim()}`);
+  }
+  if (state.roleTitle.trim()) {
+    details.push(`Role/Context: ${state.roleTitle.trim()}`);
+  }
+  if (state.timeline) {
+    details.push(`Timeline: ${state.timeline}`);
+  }
+  if (state.budget && state.budget !== "not-applicable") {
+    details.push(`Budget context: ${state.budget}`);
+  }
+  if (state.preferredContact) {
+    details.push(`Preferred contact: ${state.preferredContact}`);
+  }
+  if (details.length === 0) {
+    details.push("Primary project context and constraints can be shared in a follow-up reply.");
+  }
+
+  const lines = [
+    greeting,
+    "",
+    introByCategory[state.category],
+    "",
+    "Here is the context:",
+    ...details.map((line) => `- ${line}`),
+    "",
+    "Please let me know if this aligns with your current availability and how you would like to proceed.",
+    "",
+    "Best regards,",
+    state.name.trim()
+  ];
+
+  return lines.join("\n").replace(/\n{3,}/g, "\n\n");
+}
+
 export function ContactForm() {
   const [state, setState] = useState<FormState>(initialState);
   const [loading, setLoading] = useState(false);
+  const [aiDrafting, setAiDrafting] = useState(false);
   const [status, setStatus] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [draftRestored, setDraftRestored] = useState(false);
 
@@ -62,6 +113,12 @@ export function ContactForm() {
   const validMessageLength = state.message.trim().length >= MESSAGE_MIN;
   const canSubmit =
     !loading && state.consent && validMessageLength && Boolean(state.name.trim()) && Boolean(state.email.trim());
+  const canUseAiWriter =
+    !loading &&
+    !aiDrafting &&
+    Boolean(state.name.trim()) &&
+    EMAIL_REGEX.test(state.email.trim()) &&
+    Boolean(state.category);
 
   const activeTemplates = useMemo(
     () => contactMessageTemplates[state.category] || [],
@@ -137,6 +194,28 @@ export function ContactForm() {
     });
     setDraftRestored(false);
     setStatus(null);
+  }
+
+  function writeWithAI() {
+    if (!canUseAiWriter) {
+      setStatus({
+        type: "error",
+        text: "Fill name, email, and category first, then use Write with AI."
+      });
+      return;
+    }
+
+    setAiDrafting(true);
+    setStatus(null);
+    setState((prev) => ({
+      ...prev,
+      message: buildMessageDraft(prev)
+    }));
+    setAiDrafting(false);
+    setStatus({
+      type: "success",
+      text: "Draft added. Review and edit the message before sending."
+    });
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -333,7 +412,17 @@ export function ContactForm() {
       </div>
 
       <label className="space-y-2 text-sm">
-        <span className="text-text-secondary">Message</span>
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <span className="text-text-secondary">Message</span>
+          <button
+            type="button"
+            disabled={!canUseAiWriter}
+            onClick={writeWithAI}
+            className="rounded-full border border-border px-3 py-1 text-xs text-text-secondary transition hover:border-accent/50 hover:text-text-primary disabled:cursor-not-allowed disabled:opacity-60"
+          >
+            {aiDrafting ? "Writing..." : "Write with AI"}
+          </button>
+        </div>
         <textarea
           required
           minLength={MESSAGE_MIN}
@@ -343,6 +432,11 @@ export function ContactForm() {
           onChange={(event) => setState((prev) => ({ ...prev, message: event.target.value }))}
           className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-text-primary"
         />
+        {!canUseAiWriter ? (
+          <p className="text-xs text-text-secondary">
+            Fill name, email, and category first to enable AI-assisted drafting.
+          </p>
+        ) : null}
         <div className="flex flex-wrap items-center justify-between gap-2">
           <p className={`text-xs ${validMessageLength ? "text-text-secondary" : "text-amber-200"}`}>
             {validMessageLength

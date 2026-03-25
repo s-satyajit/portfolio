@@ -71,38 +71,41 @@ export const contactResponseCommitments = [
 
 export const contactProcessSteps = [
   {
-    title: "Context First",
-    description: "You share role/project scope, constraints, and timeline."
+    title: "Share Project Context",
+    description:
+      "Send your project goal, current stack, expected deliverables, and timeline in the form."
   },
   {
-    title: "Focused Reply",
-    description: "I respond with fit, approach, and practical next action."
+    title: "Fit and Scope Review",
+    description:
+      "I review feasibility and reply with role fit, implementation direction, and the best next step."
   },
   {
-    title: "Execution Path",
-    description: "If aligned, we move to call, scope, or delivery planning."
+    title: "Discussion and Execution Plan",
+    description:
+      "If aligned, we move to a focused discussion and lock scope, milestones, and collaboration flow."
   }
 ];
 
 export const contactFaq = [
   {
-    question: "What details help you respond faster?",
+    question: "What should I include for a project discussion?",
     answer:
-      "Role/project scope, timeline, expected ownership, and stack context are the most useful."
+      "Share the project objective, current stack, timeline, expected deliverables, and any existing constraints."
   },
   {
-    question: "Do you take freelance projects?",
+    question: "Can you handle end-to-end product delivery?",
     answer:
-      "Yes. I take focused freelance work where requirements are clear and outcomes are well-defined."
+      "Yes. I can work across frontend, backend, API integration, and applied AI features depending on scope."
   },
   {
-    question: "Are you open to full-time roles?",
+    question: "How do we start if there is a good fit?",
     answer:
-      "Yes, especially product teams where full-stack execution and applied AI features matter."
+      "Start with concise async context through the form. If aligned, we can move to a focused call and execution plan."
   },
   {
-    question: "How do you prefer starting collaboration?",
+    question: "What opportunities are you open to right now?",
     answer:
-      "Async context first through this form, followed by a focused call when there is clear alignment."
+      "I am open to full-time roles, freelance projects, and meaningful technical collaborations."
   }
 ];

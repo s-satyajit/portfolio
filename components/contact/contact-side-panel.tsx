@@ -4,7 +4,7 @@ import { Clock3, Copy, Mail, MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { profile } from "@/data/profile";
-import { contactFaq, contactProcessSteps, contactResponseCommitments } from "@/data/contact";
+import { contactFaq, contactProcessSteps } from "@/data/contact";
 import { socialLinks } from "@/data/social-links";
 
 function formatISTTime(date: Date): string {
@@ -79,16 +79,9 @@ export function ContactSidePanel() {
       </section>
 
       <section className="rounded-2xl border border-border bg-surface-card p-5">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">Response Standards</p>
-        <ul className="mt-3 space-y-2 text-sm text-text-secondary">
-          {contactResponseCommitments.map((item) => (
-            <li key={item}>- {item}</li>
-          ))}
-        </ul>
-      </section>
-
-      <section className="rounded-2xl border border-border bg-surface-card p-5">
-        <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">Process</p>
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-accent">
+          Project Discussion Flow
+        </p>
         <div className="mt-3 space-y-3">
           {contactProcessSteps.map((step, index) => (
             <article key={step.title} className="rounded-xl border border-border bg-surface p-3">

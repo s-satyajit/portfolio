@@ -4,12 +4,18 @@ import { GithubHeatmap } from "@/components/sections/github-heatmap";
 import { ButtonLink } from "@/components/ui/button-link";
 import { Section } from "@/components/ui/section";
 import { currentlyBuilding } from "@/data/currently-building";
+import { getProjects } from "@/data/projects";
 import { proofStats } from "@/data/proof-stats";
 import { Reveal } from "@/components/ui/reveal";
 
 const proofIcons = [Rocket, Cpu, FlaskConical, BriefcaseBusiness] as const;
 
 export function ProofStripSection() {
+  const projectCount = getProjects().length;
+  const resolvedProofStats = proofStats.map((item) =>
+    item.label === "Shipped Projects" ? { ...item, value: String(projectCount) } : item
+  );
+
   return (
     <Section
       id="proof"
@@ -19,7 +25,7 @@ export function ProofStripSection() {
       className="pt-4"
     >
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {proofStats.map((item, index) => {
+        {resolvedProofStats.map((item, index) => {
           const Icon = proofIcons[index % proofIcons.length];
           return (
             <Reveal key={item.label} delay={index * 0.04}>

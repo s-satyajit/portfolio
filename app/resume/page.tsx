@@ -316,7 +316,7 @@ export default async function ResumePage() {
                     <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
                       {group.title}
                     </p>
-                    <p className="mt-2 text-sm text-text-secondary">{group.items.join(" | ")}</p>
+                    <p className="mt-2 text-sm text-text-secondary">{group.items.join(", ")}</p>
                   </article>
                 ))}
               </div>

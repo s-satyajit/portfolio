@@ -1,19 +1,23 @@
 import Image from "next/image";
-import { ArrowRight, BriefcaseBusiness, Rocket, Sparkles } from "lucide-react";
+import { ArrowRight, BriefcaseBusiness, Rocket } from "lucide-react";
 
 import { ButtonLink } from "@/components/ui/button-link";
 import { Chip } from "@/components/ui/chip";
 import { Reveal } from "@/components/ui/reveal";
 import { currentlyBuilding } from "@/data/currently-building";
 import { profile } from "@/data/profile";
+import { getProjects } from "@/data/projects";
 import { proofStats } from "@/data/proof-stats";
 
 export function HeroSection() {
+  const projectCount = getProjects().length;
   const spotlightBuild = currentlyBuilding[0] ?? {
     title: "Applied AI product workflows",
     description: "Building and refining grounded AI features across portfolio projects."
   };
-  const trustSignals = proofStats.slice(0, 2);
+  const trustSignals = proofStats.slice(0, 2).map((item) =>
+    item.label === "Shipped Projects" ? { ...item, value: String(projectCount) } : item
+  );
 
   return (
     <section className="pb-16 pt-12 sm:pb-20 sm:pt-16">
@@ -25,8 +29,8 @@ export function HeroSection() {
                 {profile.heroLabel}
               </p>
               <span className="inline-flex items-center gap-1 rounded-full border border-accent/35 bg-accent-soft px-2.5 py-1 text-[11px] text-accent">
-                <Sparkles size={12} />
-                Open to internship, freelance, and full-time roles
+                
+                Open to freelance, and full-time roles
               </span>
             </div>
 

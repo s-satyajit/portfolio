@@ -1,6 +1,3 @@
-import Link from "next/link";
-
-import { ContextualAIAssistant } from "@/components/ai/contextual-ai-assistant";
 import { ScrollSyncedSidebar } from "@/components/about/scroll-synced-sidebar";
 import { ContactSidePanel } from "@/components/contact/contact-side-panel";
 import { ContactForm } from "@/components/forms/contact-form";
@@ -9,7 +6,6 @@ import { ButtonLink } from "@/components/ui/button-link";
 import { PageHeader } from "@/components/ui/page-header";
 import { SchemaScript } from "@/components/ui/schema-script";
 import { profile } from "@/data/profile";
-import { getProjects } from "@/data/projects";
 import { services } from "@/data/services";
 import { socialLinks } from "@/data/social-links";
 import { buildPageMetadata } from "@/lib/seo";
@@ -18,7 +14,7 @@ import { breadcrumbSchema, profilePageSchema } from "@/lib/schema";
 export const metadata = buildPageMetadata({
   title: "Contact",
   description:
-    "Contact Satyajit Samal for full-time roles, internship opportunities, freelance projects, and product-focused AI + full-stack collaboration.",
+    "Contact Satyajit Samal for full-time roles, freelance projects, and product-focused AI + full-stack collaboration.",
   path: "/contact"
 });
 
@@ -26,7 +22,7 @@ const contactTracks = [
   {
     title: "Hiring teams",
     description:
-      "Best for full-time or internship evaluation. Share role scope, ownership, and interview timeline.",
+      "Best for full-time evaluation. Share role scope, ownership, and interview timeline.",
     ctaLabel: "Open Recruiter Brief",
     ctaHref: "/recruiters",
     bullets: ["Role expectations", "Team context", "Interview process and timeline"]
@@ -49,13 +45,6 @@ const contactTracks = [
   }
 ];
 
-const intakeChecklist = [
-  "What you need built or discussed.",
-  "Why this matters now and desired timeline.",
-  "Any existing stack, repo, or product constraints.",
-  "What outcome would make this engagement successful."
-];
-
 const trustedSignals = [
   { label: "Primary response window", value: "24-48 hours" },
   { label: "Preferred first contact", value: "Async context via this form" },
@@ -64,9 +53,7 @@ const trustedSignals = [
 ];
 
 export default function ContactPage() {
-  const projects = getProjects();
   const linkedIn = socialLinks.find((item) => item.label === "LinkedIn")?.href;
-  const featuredProjects = projects.filter((item) => item.featured).slice(0, 2);
   const highlightedServices = services.slice(0, 3);
 
   return (
@@ -143,62 +130,9 @@ export default function ContactPage() {
               </div>
             </section>
 
-            <section className="rounded-2xl border border-border bg-surface-card p-5 sm:p-6">
-              <h2 className="font-heading text-2xl">What to include for a faster reply</h2>
-              <div className="mt-4 grid gap-3 sm:grid-cols-2">
-                <article className="rounded-xl border border-border bg-surface p-4">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
-                    Brief Checklist
-                  </p>
-                  <ul className="mt-3 space-y-2 text-sm text-text-secondary">
-                    {intakeChecklist.map((item) => (
-                      <li key={item}>- {item}</li>
-                    ))}
-                  </ul>
-                </article>
-
-                <article className="rounded-xl border border-border bg-surface p-4">
-                  <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
-                    Best Work To Review
-                  </p>
-                  <div className="mt-3 space-y-2 text-sm text-text-secondary">
-                    {featuredProjects.map((project) => (
-                      <p key={project.slug}>
-                        <Link
-                          href={`/projects/${project.slug}`}
-                          className="text-accent transition hover:text-cyan-300"
-                        >
-                          {project.title}
-                        </Link>{" "}
-                        - {project.summary}
-                      </p>
-                    ))}
-                  </div>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    <ButtonLink href="/projects" variant="secondary">
-                      View All Projects
-                    </ButtonLink>
-                  </div>
-                </article>
-              </div>
-            </section>
-
             <section>
               <ContactForm />
             </section>
-
-            <ContextualAIAssistant
-              mode="contact"
-              heading="Need help framing your message?"
-              helperText="Use AI to draft better context before submitting. Answers stay grounded to portfolio, services, and current focus."
-              suggestedPrompts={[
-                "What details should I include for a freelance request?",
-                "Which projects should recruiters review first?",
-                "What services are the best fit for dashboard development?",
-                "How quickly can he respond to collaboration messages?",
-                "What is his strongest stack for product builds?"
-              ]}
-            />
 
             <section className="rounded-2xl border border-border bg-surface-card p-5 sm:p-6">
               <h2 className="font-heading text-2xl">Continue evaluation before reaching out</h2>
